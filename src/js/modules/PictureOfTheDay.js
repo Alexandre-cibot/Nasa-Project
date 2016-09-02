@@ -47,7 +47,7 @@ var PictureOfTheDay = React.createClass({
 					    </div>
 					    <div className="card-reveal">
 					      <span className="card-title grey-text text-darken-4">{this.state.data.title}<i className="material-icons right">close</i></span>
-					      <p>{this.state.data.explanation}</p>
+					      <blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
 					    </div>
 					</div>
       			</div>

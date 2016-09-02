@@ -32,20 +32,25 @@ var Curiosity = React.createClass(
 		},
 		generateCards: function () {
 			// TODO --> générer les cartes en fonction du nombre que l'on recoit via l'API
+			console.log(this.state.data.photos[0]);
 			return(
 				<div className="card">
 					<div className="card-image waves-effect waves-block waves-light">
-						<img className="activator" src={this.state.data.photos[0].img_src} />
+						<img className="materialboxed" src={this.state.data.photos[0].img_src} />
 					</div>
 					<div className="card-content">
 						<span className="card-title activator grey-text text-darken-4">Title<i className="material-icons right">more_vert</i></span>
-						<p>By ...</p>
+						<p>Date : {this.state.data.photos[0].earth_date}</p>
 						<br />
 						<p><a href="#" className="activator">More infos ..</a></p>
 					</div>
 					<div className="card-reveal">
 						<span className="card-title grey-text text-darken-4">Title<i className="material-icons right">close</i></span>
-							<p>bla bla bla</p>
+							<blockquote className="explanation">
+								<p><b>Rover : </b>{this.state.data.photos[0].rover.name}</p>
+								<p><b>Camera : </b>{this.state.data.photos[0].camera.full_name}, ("{this.state.data.photos[0].camera.name}")</p>
+								<p>This rover has landed on Mars the {this.state.data.photos[0].rover.landing_date}, and will normaly leave the planet the {this.state.data.photos[0].rover.max_date}</p>
+							</blockquote>
 					</div>
 				</div>
 			)
