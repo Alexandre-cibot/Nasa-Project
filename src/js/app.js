@@ -13,23 +13,23 @@ var App = React.createClass(
 				links:[
 					{
 						name:'Home',
-						url:'#',
-						id:'0'
+						id:'0',
+						headerImgSrc: '/src/img/home.jpg'
 					},
 					{
 						name: 'Curiosity',
-						url: '#',
-						id: '3'
+						id: '3',
+						headerImgSrc:'/src/img/mars.jpg'
 					},
 					{
 						name:'FAQ',
-						url:'#',
-						id:'1'
+						id:'1',
+						headerImgSrc: '/src/img/home.jpg'
 					},
 					{
 						name: 'Help',
-						url:'#',
-						id:'2'
+						id:'2',
+						headerImgSrc: '/src/img/home.jpg'
 					}
 				],
 				page: 'Home'
@@ -63,7 +63,7 @@ var App = React.createClass(
 			return (
 				<div>
 					<div className="container-fluid">
-						<div className="container">
+						<div className="container-fluid">
 							<header>
 								<Navigation links={this.state.links} handleClick={this.handleNavigationClick}/>
 							</header>

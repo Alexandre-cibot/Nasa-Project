@@ -3,13 +3,22 @@ var Navigation = React.createClass(
 	{
 		getInitialState: function () {
 			return {
-				activeLink: 'Home'
+				activeLink: 'Home',
+				headerImgSrc: {
+					"Home": "/src/img/home.jpg",
+					"Curiosity": "/src/img/mars.jpg",
+					'FAQ': "/src/img/home.jpg",
+					"Help": "/src/img/home.jpg"
+				}
 			}
 		},
 		listenClick: function (activeLink) {
 			console.log(activeLink)
 			this.setState({activeLink: activeLink});
 			this.props.handleClick(activeLink);
+
+			//this.setState({headerImgSrc: activeLink})
+	
 		},
 		createContent: function () {
 			var numberOflinks = Object.keys(this.props.links).length;
@@ -36,25 +45,30 @@ var Navigation = React.createClass(
 			return linksArray; 
 		},
 		render: function () {
-			
+			var divStyle = {
+				  background: 'url(' + this.state.headerImgSrc[this.state.activeLink] + ')',
+				};
+
 			return (
-				<div className="row">
-					<nav className='blue-grey lighten-1'>
+				<div className="container-fluid">
+					<nav className='Navigation'>
 					    <div className="nav-wrapper">
-					      <a href="#!" className="brand-logo left">Nasa</a>
+					      <a href="#!" className="brand-logo left">Nasa - Project</a>
 					      <ul className="right">
 					        {this.createContent()}
 					      </ul>
 					    </div>
 					</nav>
+					<div className="row">
+						<div className="header-image" style={divStyle}></div>
+					</div>
 				</div>
-				
-
 			)
 		}
 	}
 )
 module.exports = Navigation; 
+
 
   
 
