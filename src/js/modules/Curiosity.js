@@ -13,7 +13,7 @@ var Curiosity = React.createClass(
 			}
 		},
 		componentWillMount: function () {
-			var url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
+			var url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2016-3-7&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
 			var urlEarth = 'https://api.nasa.gov/planetary/earth/imagery?lon=100.75&lat=1.5&date=2014-02-01&cloud_score=True&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
 			var that = this; 
 			$.ajax({
@@ -27,6 +27,27 @@ var Curiosity = React.createClass(
 	            }
 	        });
 		},
+		dateFormatFR : function (date) {
+			//French Format, more readable !
+			var months = {
+				'01':  'January',
+				'02':  'Februry',
+				'03':  'March',
+				'04':  'April',
+				'05':  'May',
+				'06':  'June',
+				'07':  'July',
+				'08':  'August',
+				'09':  'September',
+				'10': 'October',
+				'11': 'November',
+				'12': 'December'
+			}
+			date = date.split('-');
+			var newDate = date[2] + " " + months[date[1]] + " " + date[0];
+			return newDate;
+		},
+
 		imagesCharged: function () {
 			this.state.data.photos !== undefined ? true : false;
 		},
@@ -40,7 +61,7 @@ var Curiosity = React.createClass(
 					</div>
 					<div className="card-content">
 						<span className="card-title activator grey-text text-darken-4">Title<i className="material-icons right">more_vert</i></span>
-						<p>Date : {this.state.data.photos[0].earth_date}</p>
+						<p>Date : {this.dateFormatFR(this.state.data.photos[0].earth_date)}</p>
 						<br />
 						<p><a href="#" className="activator">More infos ..</a></p>
 					</div>
@@ -49,7 +70,7 @@ var Curiosity = React.createClass(
 							<blockquote className="explanation">
 								<p><b>Rover : </b>{this.state.data.photos[0].rover.name}</p>
 								<p><b>Camera : </b>{this.state.data.photos[0].camera.full_name}, ("{this.state.data.photos[0].camera.name}")</p>
-								<p>This rover has landed on Mars the {this.state.data.photos[0].rover.landing_date}, and will normaly leave the planet the {this.state.data.photos[0].rover.max_date}</p>
+								<p>This rover has landed on Mars the {this.dateFormatFR(this.state.data.photos[0].rover.landing_date)}, and will normaly leave the planet the {this.dateFormatFR(this.state.data.photos[0].rover.max_date)}</p>
 							</blockquote>
 					</div>
 				</div>
