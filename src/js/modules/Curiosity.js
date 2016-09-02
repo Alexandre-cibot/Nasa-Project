@@ -16,7 +16,7 @@ var Curiosity = React.createClass(
 
 				// Getting the JSON from the API
 				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2016-6-3&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2016-8-9&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	console.log(result);
 				 	that.setState({data: result});
 	             	that.setState({showImages: true});
@@ -58,7 +58,7 @@ var Curiosity = React.createClass(
 
 			for(var i = 0; i < cardsLimit(this.state.data.photos.length, 50); i++){
 				cards.push(
-					<div className="col s3 m2" key={i}>
+					<div className="col s6 m2" key={i}>
 							<div className="card">
 								<div className="card-image waves-light">
 									<img className="materialboxed" src={this.state.data.photos[i].img_src} ref={this.initMaterialBox}/>
