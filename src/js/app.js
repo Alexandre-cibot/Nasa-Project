@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var Navigation = require('./modules/Navigation');
 var PictureOfTheDay = require ('./modules/PictureOfTheDay');
 var Curiosity = require('./modules/Curiosity');

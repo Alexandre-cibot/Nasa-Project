@@ -45,8 +45,8 @@ var Navigation = React.createClass(
 			return linksArray; 
 		},
 		render: function () {
-			var divStyle = {
-				  background: 'url(' + this.state.headerImgSrc[this.state.activeLink] + ')',
+			var headerImgStyle = {
+				  background: 'url(' + this.state.headerImgSrc[this.state.activeLink] + ')'
 				};
 
 			return (
@@ -60,7 +60,7 @@ var Navigation = React.createClass(
 					    </div>
 					</nav>
 					<div className="row">
-						<div className="header-image" style={divStyle}></div>
+						<div className="header-image" style={headerImgStyle}></div>
 					</div>
 				</div>
 			)

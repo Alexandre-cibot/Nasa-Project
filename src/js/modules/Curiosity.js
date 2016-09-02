@@ -1,5 +1,5 @@
 var React = require('react');
-var $ = require('jquery');
+var DatePicker = require('./DatePicker');
 
 
 //TODO : Il faudra bien entendu rendre la requete Dynamique, afin que les photos ne soient pas toujours les mêmes.
@@ -58,10 +58,10 @@ var Curiosity = React.createClass(
 
 			for(var i = 0; i < cardsLimit(this.state.data.photos.length, 50); i++){
 				cards.push(
-					<div className="col s4 m3" key={i}>
+					<div className="col s3 m2" key={i}>
 							<div className="card">
-								<div className="card-image waves-effect waves-block waves-light">
-									<img className="materialboxed" src={this.state.data.photos[i].img_src} />
+								<div className="card-image waves-light">
+									<img className="materialboxed" src={this.state.data.photos[i].img_src} ref={this.initMaterialBox}/>
 								</div>
 								<div className="card-content">
 									<span className="card-title activator grey-text text-darken-4">Title<i className="material-icons right">more_vert</i></span>
@@ -87,6 +87,7 @@ var Curiosity = React.createClass(
 			console.log('Enter in the Display function');
 			return (
 				<div className="Curiosity">
+					<DatePicker />
 					<div className="row">
 		      			
 		      				{this.generateCards()}
@@ -98,6 +99,7 @@ var Curiosity = React.createClass(
 			)
 		},
 		render: function () {
+			console.log('render');
 			if(this.state.showImages == true){
 				console.log('images displayed')
 				return (this.displayContent())
@@ -111,6 +113,9 @@ var Curiosity = React.createClass(
 				)
 			}
 			
+		},
+		initMaterialBox: function (element) {
+    		$(element).materialbox();
 		}
 	}
 )

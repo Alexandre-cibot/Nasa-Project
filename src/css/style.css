@@ -13,10 +13,6 @@ blockquote {
 .header-image{
   border:1px solid black; 
   height:200px;
-  /*background:url('/src/img/Mars.jpg');*/
-/*  background-position:center;
-  background-size: 100%;  
-  background-repeat: !no-repeat; */
 }
 
 .explanation{
@@ -116,4 +112,41 @@ nav ul li:hover {
 .Curiosity .card .card-reveal{
    border-radius:12px; 
 }
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 29px;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    color: #162252;
+    transition: all 0.3s;
+}
+/* Date picker */
+.picker__date-display {
+    text-align: center;
+    background-color: #162252;
+    color: #fff;
+    padding-bottom: 15px;
+    font-weight: 300;
+}
 
+.picker__weekday-display {
+    background-color: #162252;
+    padding: 10px;
+    font-weight: 200;
+    letter-spacing: .5;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+.picker__close, .picker__today {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+    color: #162252;
+}
