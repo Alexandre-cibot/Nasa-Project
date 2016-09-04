@@ -1,7 +1,6 @@
 var React = require('react');
 var DatePicker = require('./DatePicker');
 
-
 //TODO : Il faudra bien entendu rendre la requete Dynamique, afin que les photos ne soient pas toujours les mêmes.
 var Curiosity = React.createClass(
 	{
@@ -9,22 +8,33 @@ var Curiosity = React.createClass(
 			return {
 				data : {},
 				showImages: false,
-				cardsArray: []
+				cardsArray: [],
+				earth_date_chosen: '2016-09-01'
 			}
 		},
 		componentWillMount: function () {
 
 				// Getting the JSON from the API
+
+				this.updateJSON();
+
+				// var that = this; 
+				//  $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				//  	console.log(result);
+				//  	that.setState({data: result});
+	   //           	that.setState({showImages: true});
+				//  });
+		},
+		updateJSON: function () {
 				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2016-8-9&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	console.log(result);
 				 	that.setState({data: result});
 	             	that.setState({showImages: true});
 				 });
 		},
-		dateFormatFR : function (date) {
-			//French Format, more readable !
-			var months = {
+
+		months : {
 				'01':  'January',
 				'02':  'Februry',
 				'03':  'March',
@@ -37,10 +47,20 @@ var Curiosity = React.createClass(
 				'10': 'October',
 				'11': 'November',
 				'12': 'December'
-			}
+		},
+		dateFormatFR : function (date) {
+			//French Format, more readable !
+			// Initialy format date : year-mouth-day, ex : 2016-09-01 
+			//This is the format that we want : 1 September 2016. 
 			date = date.split('-');
-			var newDate = date[2] + " " + months[date[1]] + " " + date[0];
+			var newDate = date[2] + " " + this.months[date[1]] + " " + date[0];
 			return newDate;
+		},
+		handleChangeDate: function (newDate) {
+			this.setState({showImages:false});
+			this.setState({earth_date_chosen: newDate});
+			this.updateJSON();
+		
 		},
 
 		imagesCharged: function () {
@@ -48,7 +68,6 @@ var Curiosity = React.createClass(
 		},
 		generateCards: function () {
 			// We generate as many cards as we need. With a limit of 100. (to be sure)
-			console.log(this.state.data.photos);
 			var cards = [];
 			var cardsLimit = function (numberOfPhotos, limit) {
 				// Return the number of photos, width a maximum limit
@@ -58,7 +77,7 @@ var Curiosity = React.createClass(
 
 			for(var i = 0; i < cardsLimit(this.state.data.photos.length, 50); i++){
 				cards.push(
-					<div className="col s6 m2" key={i}>
+					<div className="col m2" key={i}>
 							<div className="card">
 								<div className="card-image waves-light">
 									<img className="materialboxed" src={this.state.data.photos[i].img_src} ref={this.initMaterialBox}/>
@@ -74,7 +93,8 @@ var Curiosity = React.createClass(
 										<blockquote className="explanation">
 											<p><b>Rover : </b>{this.state.data.photos[i].rover.name}</p>
 											<p><b>Camera : </b>{this.state.data.photos[i].camera.full_name}, ("{this.state.data.photos[i].camera.name}")</p>
-											<p>This rover has landed on Mars the {this.dateFormatFR(this.state.data.photos[i].rover.landing_date)}, and will normaly leave the planet the {this.dateFormatFR(this.state.data.photos[i].rover.max_date)}</p>
+											<p>This photo has been taken the {this.dateFormatFR(this.state.data.photos[i].earth_date)}</p>
+											<p> Last photo taken by this Curiosity rover : {this.dateFormatFR(this.state.data.photos[i].rover.max_date)}</p>
 										</blockquote>
 								</div>
 							</div>
@@ -84,10 +104,9 @@ var Curiosity = React.createClass(
 			return cards; 
 		},
 		displayContent: function () {
-			console.log('Enter in the Display function');
 			return (
 				<div className="Curiosity">
-					<DatePicker />
+					<DatePicker months={this.months} handleChangeDate={this.handleChangeDate}/>
 					<div className="row">
 		      			
 		      				{this.generateCards()}
@@ -99,9 +118,9 @@ var Curiosity = React.createClass(
 			)
 		},
 		render: function () {
-			console.log('render');
 			if(this.state.showImages == true){
-				console.log('images displayed')
+				console.log('There is a rendeeeerr with images');
+				console.log('current Date : ' + this.state.earth_date_chosen);
 				return (this.displayContent())
 			}
 			else{
