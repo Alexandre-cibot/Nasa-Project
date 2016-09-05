@@ -1,7 +1,8 @@
 
   $(document).ready(function(){
   	// This code doesn't curently work
-  	    console.log('ALL IS READY///OR NOT -_-');
+  		//console.log('Including the Nav script ....')
+  	    //$(".button-collapse").sidNav(); 
 
   });
 

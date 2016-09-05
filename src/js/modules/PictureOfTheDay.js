@@ -49,9 +49,6 @@ var PictureOfTheDay = React.createClass({
 	render: function () {
 		
 		return this.createBlockImage();
-	},
-	componentDidMount: function () {
-
 	}
 })
 

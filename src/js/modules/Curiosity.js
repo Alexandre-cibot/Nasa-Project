@@ -177,8 +177,13 @@ var Curiosity = React.createClass(
 			else{
 				console.log('Chargement des images ...');
 				return(
-					<div>
-						<p className="loadingImages">Chargement ...<img src="../src/img/loader.gif"/></p>
+					<div className="row">
+						<div className="col s6 offset-s3">
+							<p className="loadingImages">Chargement ...
+								<img src="../src/img/loader.gif"/>
+							</p>
+						</div>
+			
 					</div>
 				)
 			}

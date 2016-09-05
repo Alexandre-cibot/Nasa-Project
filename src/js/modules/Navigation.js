@@ -52,13 +52,19 @@ var Navigation = React.createClass(
 				};
 
 			return (
-				<div className="container-fluid">
+					<div className="container-fluid" ref={this.initNavigation}>
 					<nav className='Navigation'>
 					    <div className="nav-wrapper">
 					      <a href="#!" className="brand-logo left">Nasa - Project</a>
-					      <ul className="right">
+					      <ul className="right hide-on-med-and-down">
 					        {this.createContent()}
 					      </ul>
+					       <ul className="side-nav" id="mobile-demo">
+					        <li><a href="sass.html">Sass</a></li>
+					        <li><a href="badges.html">Components</a></li>
+					        <li><a href="collapsible.html">Javascript</a></li>
+					        <li><a href="mobile.html">Mobile</a></li>
+				      	  </ul>
 					    </div>
 					</nav>
 					<div className="row">
@@ -66,11 +72,40 @@ var Navigation = React.createClass(
 					</div>
 				</div>
 			)
+		},
+		initNavbar: function (element) {
+			$(element).slideNav();
 		}
 	}
+
 )
 module.exports = Navigation; 
 
+
+/*
+	
+
+
+
+					<nav>
+				    <div className="nav-wrapper" ref={this.initNavbar}>
+				      <a href="#!" className="brand-logo">Logo</a>
+				      <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+				      <ul className="right hide-on-med-and-down">
+				        <li><a href="sass.html">Sass</a></li>
+				        <li><a href="badges.html">Components</a></li>
+				        <li><a href="collapsible.html">Javascript</a></li>
+				        <li><a href="mobile.html">Mobile</a></li>
+				      </ul>
+				      <ul className="side-nav" id="mobile-demo">
+				        <li><a href="sass.html">Sass</a></li>
+				        <li><a href="badges.html">Components</a></li>
+				        <li><a href="collapsible.html">Javascript</a></li>
+				        <li><a href="mobile.html">Mobile</a></li>
+				      </ul>
+				    </div>
+				  </nav>
+*/
 
   
 
