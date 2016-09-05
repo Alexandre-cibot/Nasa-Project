@@ -8,6 +8,7 @@ var Curiosity = React.createClass(
 			return {
 				data : {},
 				showImages: false,
+				failJSON: false,
 				cardsArray: [],
 				earth_date_chosen: '2016-09-01',
 				max_date:'2016-09-01'
@@ -45,9 +46,17 @@ var Curiosity = React.createClass(
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + newDate + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	console.log(result);
 				 	that.setState({data: result});
+				 	that.setState({earth_date_chosen: newDate});
+				 	// we say that the JSON hasn't failed. 
+				 	that.state.failJSON == true ? false : null
 	             	that.setState({showImages: true});
 				 	
-				});
+				})
+				 .fail(function(){
+				 	// ex: 9 june 2014, there is no pictures for that day. 
+				 	console.log('Impossible to reach');	
+				 	that.setState({failJSON: true});
+				 });
 		},
 
 		months : {
@@ -74,9 +83,23 @@ var Curiosity = React.createClass(
 		},
 		handleChangeDate: function (newDate) {
 			this.setState({showImages:false});
-			this.setState({earth_date_chosen: newDate});
 			this.updateJSON(newDate);
 		
+		},
+		handleJSONFailed: function (){
+			console.log('Impossible to reach');
+			var that = this;
+			var handleClick = function () {
+				console.log('Go Back');
+				return that.updateJSON(that.state.max_date);
+			}
+				return (
+					<div className="failJSON">
+						<img src="../src/img/alien.gif"/>
+						<h3>I'm affraid, there is no photos at this date.</h3>
+						<a href="#" onClick={handleClick}className="waves-effect waves-light btn btn-large"><i className="material-icons right">replay</i>Back</a>
+					</div>
+				)
 		},
 
 		imagesCharged: function () {
@@ -134,11 +157,17 @@ var Curiosity = React.createClass(
 			)
 		},
 		render: function () {
+			//Everything goes well
 			if(this.state.showImages == true){
 				console.log('There is a rendeeeerr with images');
 				console.log('current Date : ' + this.state.earth_date_chosen);
 				return (this.displayContent())
 			}
+			//The date return no photos
+			else if (this.state.failJSON == true){
+				return this.handleJSONFailed(); 
+			}
+			//The data is charging
 			else{
 				console.log('Chargement des images ...');
 				return(
@@ -147,7 +176,6 @@ var Curiosity = React.createClass(
 					</div>
 				)
 			}
-			
 		},
 		initMaterialBox: function (element) {
 			//Required for datePicker

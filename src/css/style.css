@@ -128,17 +128,41 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
     color: #162252;
     transition: all 0.3s;
 }
+
+.failJSON{
+  text-align:center;
+}
+.failJSON h3{
+  color: #bdbdbd;
+}
+.failJSON img{
+  margin-left:-69px; 
+}
+.failJSON a {
+  margin: 22px 0;
+}
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #90caf9;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
 /* Date picker */
 .picker__date-display {
     text-align: center;
-    background-color: #162252;
+    background-color: #90caf9;
     color: #fff;
     padding-bottom: 15px;
     font-weight: 300;
 }
 
 .picker__weekday-display {
-    background-color: #162252;
+    background-color: #90caf9;
     padding: 10px;
     font-weight: 200;
     letter-spacing: .5;
@@ -148,5 +172,5 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 .picker__close, .picker__today {
     font-size: 1.1rem;
     padding: 0 1rem;
-    color: #162252;
+    color: #90caf9;
 }
