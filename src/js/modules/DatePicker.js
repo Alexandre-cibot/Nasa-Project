@@ -12,23 +12,9 @@ var DatePicker = React.createClass(
 			  	firstDay: 1,
 			    selectMonths: true, // Creates a dropdown to control month
 			    selectYears: 5, // Creates a dropdown of 5 years to control year
-			    max: new Date(2016,(9-1),5),
-			    min: new Date(2014,(1-1), 1)
+			    max: new Date(this.props.max_date),
+			    min: new Date(2012,(8-1), 6) // Rover's landing date. There is no picture before.
 			  });
-			 //  $('.datepicker').pickadate({
-				//   labelMonthNext: 'Next month',
-				//   labelMonthPrev: 'Previous month',
-				//   labelMonthSelect: 'Select a month',
-				//   labelYearSelect: 'Select a year',
-				//   monthsFull: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
-				//   monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
-				//   weekdaysFull: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
-				//   weekdaysShort: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
-				//   weekdaysLetter: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
-				//   today: 'Today',
-				//   clear: 'Clear',
-				//   close: 'Close'
-				// });
 		},
 		dateFormatAPI: function (date) { 
 		//The date that we inital have is format like : 30 May, 1992
@@ -66,7 +52,7 @@ var DatePicker = React.createClass(
 		render: function () {
 			return(
 				<div>
-					<input id="input-date" type="date" className="datepicker" placeholder='Click to find a date' ref={this.initDatePicker}/>
+					<input id="input-date" type="date" className="datepicker" placeholder={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker}/>
 					<div className="row">
 						<button className="waves-effect waves-light btn" onClick={this.handleClick}>Search</button>
 					</div>

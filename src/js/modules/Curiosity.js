@@ -9,7 +9,8 @@ var Curiosity = React.createClass(
 				data : {},
 				showImages: false,
 				cardsArray: [],
-				earth_date_chosen: '2016-09-01'
+				earth_date_chosen: '2016-09-01',
+				max_date:'2016-09-01'
 			}
 		},
 		componentWillMount: function () {
@@ -17,10 +18,11 @@ var Curiosity = React.createClass(
 				// Getting the JSON from the API automatically
 				var that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 	console.log(result);
+				 	console.log('Initial JSON Taking');
 				 	//We check if there is there the newest photos from the rover.
 				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
 				 		console.log('No update needed !');
+				 		console.log(result);
 				 		that.setState({data: result});
 	             		that.setState({showImages: true});
 				 	}
@@ -28,19 +30,19 @@ var Curiosity = React.createClass(
 				 		// We get the newest JSON file.
 				 		 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + result.photos[0].rover.max_date + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 		 	console.log('Update well succeed');
-				 		 	console.log('New result : ' + result);
+				 		 	console.log(result);
 				 		 	that.setState({data: result});
-				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date});
+				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
+				 		 	that.setState({max_date: result.photos[0].rover.max_date});
 				 		 	that.setState({showImages: true});
 				 		 });
 				 	}
 				});
 		},
-		updateJSON: function () {
+		updateJSON: function (newDate) {
 			//We make a new request when the user change the Date. 
 				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 	console.log('Initial JSON Taking');
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + newDate + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	console.log(result);
 				 	that.setState({data: result});
 	             	that.setState({showImages: true});
@@ -73,7 +75,7 @@ var Curiosity = React.createClass(
 		handleChangeDate: function (newDate) {
 			this.setState({showImages:false});
 			this.setState({earth_date_chosen: newDate});
-			this.updateJSON();
+			this.updateJSON(newDate);
 		
 		},
 
@@ -120,7 +122,7 @@ var Curiosity = React.createClass(
 		displayContent: function () {
 			return (
 				<div className="Curiosity">
-					<DatePicker months={this.months} handleChangeDate={this.handleChangeDate}/>
+					<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} handleChangeDate={this.handleChangeDate}/>
 					<div className="row">
 		      			
 		      				{this.generateCards()}
