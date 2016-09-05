@@ -21,42 +21,37 @@ var PictureOfTheDay = React.createClass({
             success: function (data) {
             	//console.log(data);
             	that.setState({data: data});
+            	that.props.handleFooter(true);
             }
         });
 	},
 
-	handleShowModal(){
-        this.setState({showModal: true})
-    },
-
 	createBlockImage: function () {
 	
 		return (
-			  <div className="row">
-      			<div className="col s4 push-s4">
-      			<h2>Picture of the day</h2>
-      				<div className="card" id='PictureOfTheDay'>
-					    <div className="card-image waves-effect waves-block waves-light">
-					      <img className="activator" src={this.state.data.url} />
-					    </div>
-					    <div className="card-content">
-					      <span className="card-title activator grey-text text-darken-4">{this.state.data.title}<i className="material-icons right">more_vert</i></span>
-					      <p>By {this.state.data.copyright}</p>
-					      <br />
-					      <p><a href="#" className="activator">More infos ..</a></p>
-					    </div>
-					    <div className="card-reveal">
-					      <span className="card-title grey-text text-darken-4">{this.state.data.title}<i className="material-icons right">close</i></span>
-					      <blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
-					    </div>
+			<div className="container" id="PictureOfTheDay">
+				<div className="row">
+					<h2>Picture of the day</h2>
+				</div>
+				<div className="row">
+					<div className="col s12 m6">
+						<img className="responsive-img" src={this.state.data.url} />
 					</div>
-      			</div>
+					<div className="col s12 m6">
+						<h4 className="grey-text text-darken-4 title-content">{this.state.data.title}</h4>
+					 	<blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
+					</div>  
+	      		</div>
       		</div>
 			)	
 	},
 
 	render: function () {
+		
 		return this.createBlockImage();
+	},
+	componentDidMount: function () {
+
 	}
 })
 

@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var Navigation = require('./modules/Navigation');
 var PictureOfTheDay = require ('./modules/PictureOfTheDay');
 var Curiosity = require('./modules/Curiosity');
+var Footer = require('./modules/Footer');
 
 var App = React.createClass(
 	{	
@@ -31,7 +32,8 @@ var App = React.createClass(
 						headerImgSrc: '/src/img/home.jpg'
 					}
 				],
-				page: 'Home'
+				page: 'Home',
+				showFooter: false
 			}
 		},
 		handleNavigationClick: function (currentLink) {
@@ -44,10 +46,10 @@ var App = React.createClass(
 		showPage: function () {
 			switch(this.state.page){
 				case 'Home':
-					return <PictureOfTheDay />;
+					return <PictureOfTheDay handleFooter={this.handleFooter}/>;
 				break;
 				case 'Curiosity':
-					return <Curiosity />;
+					return <Curiosity handleFooter={this.handleFooter}/>;
 				break;
 				case 'FAQ':
 					return <p className="loadingImages">Nothing yet ! </p>;
@@ -57,20 +59,31 @@ var App = React.createClass(
 				break; 
 			}
 		},
-
+		handleFooter: function (boolean) {
+			// the parametre is a bolean, to define if YES we should display the footer, or not. 
+			this.setState({showFooter: boolean}) 
+		},
+		showFooter: function () {
+			if(this.state.showFooter == true){
+				return <Footer />
+			}
+		},
 		render: function () {
 			return (
 				<div>
 					<div className="container-fluid">
 						<div className="container-fluid">
 							<header>
-								<Navigation links={this.state.links} handleClick={this.handleNavigationClick}/>
+								<Navigation links={this.state.links} handleClick={this.handleNavigationClick} handleFooter={this.handleFooter}/>
 							</header>
 						</div>
 						<div id="main-content">
 							{this.showPage()}
 						</div>
 					</div>
+	
+					{this.showFooter()}
+				
 				</div>
 				);
 		}

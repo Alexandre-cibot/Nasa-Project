@@ -26,6 +26,7 @@ var Curiosity = React.createClass(
 				 		console.log(result);
 				 		that.setState({data: result});
 	             		that.setState({showImages: true});
+	             		that.props.handleFooter(true);
 				 	}
 				 	else{
 				 		// We get the newest JSON file.
@@ -36,6 +37,7 @@ var Curiosity = React.createClass(
 				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
 				 		 	that.setState({max_date: result.photos[0].rover.max_date});
 				 		 	that.setState({showImages: true});
+				 		 	that.props.handleFooter(true);
 				 		 });
 				 	}
 				});
@@ -47,9 +49,15 @@ var Curiosity = React.createClass(
 				 	console.log(result);
 				 	that.setState({data: result});
 				 	that.setState({earth_date_chosen: newDate});
+
 				 	// we say that the JSON hasn't failed. 
-				 	that.state.failJSON == true ? false : null
+				 	
+				 	if(that.state.failJSON == true){
+				 		that.setState({failJSON: false})
+				 	}
 	             	that.setState({showImages: true});
+
+	             	that.props.handleFooter(true);
 				 	
 				})
 				 .fail(function(){
@@ -83,6 +91,7 @@ var Curiosity = React.createClass(
 		},
 		handleChangeDate: function (newDate) {
 			this.setState({showImages:false});
+			this.props.handleFooter(false);
 			this.updateJSON(newDate);
 		
 		},
@@ -147,12 +156,8 @@ var Curiosity = React.createClass(
 				<div className="Curiosity">
 					<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} handleChangeDate={this.handleChangeDate}/>
 					<div className="row">
-		      			
-		      				{this.generateCards()}
-		      			
-
+		      			{this.generateCards()}
 	      			</div>
-
 	      		</div>
 			)
 		},
@@ -161,6 +166,7 @@ var Curiosity = React.createClass(
 			if(this.state.showImages == true){
 				console.log('There is a rendeeeerr with images');
 				console.log('current Date : ' + this.state.earth_date_chosen);
+				console.log("Ok c'est bon")
 				return (this.displayContent())
 			}
 			//The date return no photos

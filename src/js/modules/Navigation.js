@@ -13,9 +13,11 @@ var Navigation = React.createClass(
 			}
 		},
 		listenClick: function (activeLink) {
+			this.props.handleFooter(false);
 			console.log(activeLink)
 			this.setState({activeLink: activeLink});
 			this.props.handleClick(activeLink);
+
 
 			//this.setState({headerImgSrc: activeLink})
 	

@@ -4,6 +4,7 @@
 * GLOBAL
 *
 */
+
 blockquote {
     margin: 20px 0;
     padding-left: 1.5rem;
@@ -36,7 +37,7 @@ nav .brand-logo {
     white-space: nowrap;
 }
 .Navigation{
-  background-color:#162252;
+  background-color:rgba(22, 34, 82, 0.8);
   padding: 0 30px;
   letter-spacing: 2px;
 }
@@ -47,7 +48,7 @@ nav ul li.active {
 
 nav ul li:hover {
   background: rgba(255,255,255,0.2);
-};
+}
 
 /*
 *
@@ -55,24 +56,16 @@ nav ul li:hover {
 * Picture Of The Day
 *
 */
-#PictureOfTheDay{
-      box-shadow: 15px 11px 10px 8px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+#PictureOfTheDay h2{
+  color:#162252;
 }
-#PictureOfTheDay.card{
-    position: relative;
-    margin: 0.5rem 0 1rem 0;
-    background-color: #fff;
-    transition: box-shadow .25s;
-    border-radius: 20px;
+#PictureOfTheDay h4{
+  margin-top:-7px;
 }
 
-#PictureOfTheDay.card img {
-  border-radius: 20px 20px 0 0; 
+#PictureOfTheDay img{
+  margin-bottom:30px;
 }
-#PictureOfTheDay .card-reveal{
-  border-radius:20px; 
-}
-
 
 /*
 *
@@ -174,3 +167,14 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
     padding: 0 1rem;
     color: #90caf9;
 }
+
+/*footer*/
+
+#footer{
+  background-color:rgba(22, 34, 82, 0.8);
+  margin-top: 120px;
+  display:;
+}
+
+
+
