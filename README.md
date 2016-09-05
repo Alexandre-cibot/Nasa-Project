@@ -1,5 +1,6 @@
 # Nasa-Project
-Using Nasa API, this applciation allow you to search and display Curiosity's pictures. 
+Using Nasa API, this application allow users to search and display Curiosity's pictures. 
+
 This project is in progress.
 
 ## Usage
