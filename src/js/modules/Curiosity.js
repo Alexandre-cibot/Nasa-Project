@@ -14,24 +14,38 @@ var Curiosity = React.createClass(
 		},
 		componentWillMount: function () {
 
-				// Getting the JSON from the API
-
-				this.updateJSON();
-
-				// var that = this; 
-				//  $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				//  	console.log(result);
-				//  	that.setState({data: result});
-	   //           	that.setState({showImages: true});
-				//  });
-		},
-		updateJSON: function () {
+				// Getting the JSON from the API automatically
 				var that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	console.log(result);
+				 	//We check if there is there the newest photos from the rover.
+				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
+				 		console.log('No update needed !');
+				 		that.setState({data: result});
+	             		that.setState({showImages: true});
+				 	}
+				 	else{
+				 		// We get the newest JSON file.
+				 		 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + result.photos[0].rover.max_date + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 		 	console.log('Update well succeed');
+				 		 	console.log('New result : ' + result);
+				 		 	that.setState({data: result});
+				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date});
+				 		 	that.setState({showImages: true});
+				 		 });
+				 	}
+				});
+		},
+		updateJSON: function () {
+			//We make a new request when the user change the Date. 
+				var that = this; 
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 	console.log('Initial JSON Taking');
+				 	console.log(result);
 				 	that.setState({data: result});
 	             	that.setState({showImages: true});
-				 });
+				 	
+				});
 		},
 
 		months : {
@@ -134,6 +148,7 @@ var Curiosity = React.createClass(
 			
 		},
 		initMaterialBox: function (element) {
+			//Required for datePicker
     		$(element).materialbox();
 		}
 	}

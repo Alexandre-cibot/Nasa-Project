@@ -9,9 +9,26 @@ var DatePicker = React.createClass(
 		},
 		initDatePicker: function (element) {
 			  $(element).pickadate({
+			  	firstDay: 1,
 			    selectMonths: true, // Creates a dropdown to control month
-			    selectYears: 15 // Creates a dropdown of 15 years to control year
+			    selectYears: 5, // Creates a dropdown of 5 years to control year
+			    max: new Date(2016,(9-1),5),
+			    min: new Date(2014,(1-1), 1)
 			  });
+			 //  $('.datepicker').pickadate({
+				//   labelMonthNext: 'Next month',
+				//   labelMonthPrev: 'Previous month',
+				//   labelMonthSelect: 'Select a month',
+				//   labelYearSelect: 'Select a year',
+				//   monthsFull: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+				//   monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+				//   weekdaysFull: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+				//   weekdaysShort: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
+				//   weekdaysLetter: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
+				//   today: 'Today',
+				//   clear: 'Clear',
+				//   close: 'Close'
+				// });
 		},
 		dateFormatAPI: function (date) { 
 		//The date that we inital have is format like : 30 May, 1992
