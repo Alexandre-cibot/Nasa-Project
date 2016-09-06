@@ -11,7 +11,8 @@ var Curiosity = React.createClass(
 				failJSON: false,
 				cardsArray: [],
 				earth_date_chosen: '2016-09-01',
-				max_date:'2016-09-01'
+				max_date:'2016-09-01',
+				picsNumber: 10
 			}
 		},
 
@@ -101,7 +102,7 @@ var Curiosity = React.createClass(
 			// Initialy format date : year-mouth-day, ex : 2016-09-01 
 			//This is the format that we want : 1 September 2016. 
 			date = date.split('-');
-			var newDate = date[2] + " " + this.months[date[1]] + " " + date[0];
+			var newDate = date[2] + " " + this.months[date[1]] + ", " + date[0];
 			return newDate;
 		},
 		handleChangeDate: function (newDate) {
@@ -109,6 +110,14 @@ var Curiosity = React.createClass(
 			this.props.handleFooter(false);
 			this.updateJSON(newDate);
 		
+		},
+		handleChangePicsNumber: function (number) {
+			if(number !== this.state.picsNumber){
+				this.setState({picsNumber: number});
+			}
+			else{
+				console.log('Cest deja le bon nombre')
+			}
 		},
 		handleJSONFailed: function (){
 			console.log('Impossible to reach data, because they doesn\'t exist yet');
@@ -139,7 +148,7 @@ var Curiosity = React.createClass(
 
 			};
 
-			for(var i = 0; i < cardsLimit(this.state.data.photos.length, 50); i++){
+			for(var i = 0; i < cardsLimit(this.state.data.photos.length, this.state.picsNumber); i++){
 				cards.push(
 					<div className="col m2" key={i}>
 							<div className="card">
@@ -178,7 +187,7 @@ var Curiosity = React.createClass(
 					</div>
 					<div className="row">
 						<div className="col s12">
-							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} handleChangeDate={this.handleChangeDate}/>
+							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={this.state.data.photos.length}/>
 						</div>
 					</div>
 					<div className="row">

@@ -1,5 +1,5 @@
 var React = require('react');
-
+var ReactDOM = require('react-dom');
 var DatePicker = React.createClass(
 	{
 		getInitialState: function () {
@@ -17,18 +17,18 @@ var DatePicker = React.createClass(
 			  });
 		},
 		dateFormatAPI: function (date) { 
-		//The date that we inital have is format like : 30 May, 1992
-		//We need to have this format : 1992-05-30
+			//The date that we inital have is format like : 30 May, 1992
+			//We need to have this format : 1992-05-30
 
-		//function to find a key associate to a value's object
-		this.props.months.getKeyByValue = function( value ) {
-			    for( var prop in this ) {
-			        if( this.hasOwnProperty( prop ) ) {
-			             if( this[ prop ] === value )
-			                 return prop;
-			        }
-			    }
-		};
+			//function to find a key associate to a value's object
+			this.props.months.getKeyByValue = function( value ) {
+				    for( var prop in this ) {
+				        if( this.hasOwnProperty( prop ) ) {
+				             if( this[ prop ] === value )
+				                 return prop;
+				        }
+				    }
+			};
 			date = date.split(' '); 
 			// We replace the full name of the mounth bu a number, but before, lets remove the coma ! 
 			date[1] = date[1].substr(0, date[1].length -1);
@@ -40,25 +40,48 @@ var DatePicker = React.createClass(
 
 		handleClick: function () {
 			var content = $('#input-date').val(); 
+			var numberOfPics = $('#dropdown').val();
 			if(content.length !== 0 ){
 				var newDate = this.dateFormatAPI(content);
 				console.log(newDate);
-				this.props.handleChangeDate(newDate);
+				this.props.changeDate(newDate);
+				this.props.changePicsNumber(numberOfPics);
 			}
 			else{
 				alert('Veuillez entrer une date'); 
 			}
 		},
+		definePicsNumber: function () {
+			let options = [];
+			let maxPics = this.props.maxPics;
+				//We create 5 option, 10 to 50. 
+				for(let i = 10; i <= 20; i+=10){
+				    options.push(<option key={i} value={i}>{i}</option>);
+				}
+				options.push(<option key={maxPics} value={maxPics}>{maxPics}</option>)
+				return (
+					 <select id="dropdown" defaultValue={this.props.picsNumber}>
+				        <option disabled>Number of pictures displayed</option>
+				        {options}
+				     </select>
+				)
+		},
+		componentDidMount: function () {
+			  var element = ReactDOM.findDOMNode(this.refs.dropdown)
+
+			  $(element).ready(function() {
+			    $('select').material_select();
+			  });
+		},
 		render: function () {
 			return(
 				<div>
-					<input id="input-date" type="date" className="datepicker" placeholder={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker} />
+					<input id="input-date" type="date" className="datepicker" value={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker} />
 					<div className="row">
-						<select name="select">
-						  <option value="value1">Valeur 1</option> 
-						  <option value="value2" selected>Valeur 2</option>
-						  <option value="value3">Valeur 3</option>
-						</select>
+					{/* Number of pictures displayed */}
+					{this.definePicsNumber()}
+					 
+     
 					</div>
 					<div className="row">
 						<button className="waves-effect waves-light btn" onClick={this.handleClick}>Search</button>
