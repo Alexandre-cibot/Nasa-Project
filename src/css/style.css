@@ -12,8 +12,14 @@ blockquote {
 }
 
 .header-image{
-  border:1px solid black; 
+
   height:200px;
+}
+
+@media(max-width:600px){
+  .header-image{
+    height:100px;
+  }
 }
 
 .explanation{
@@ -32,7 +38,7 @@ nav .brand-logo {
     position: absolute;
     color: #fff;
     display: inline-block;
-    font-size: 2.1rem;
+    font-size: 17px;
     padding-left: 17px;
     white-space: nowrap;
 }
@@ -58,10 +64,24 @@ nav ul li:hover {
 */
 #PictureOfTheDay h2{
   color:#162252;
-  margin-left:10px;
+  /*margin-left:10px;*/
+  font-size:23px;
+  letter-spacing: 6px; 
+}
+@media(max-width:600px){
+  #PictureOTheDay h2{
+    font-size:28px;
+  }
 }
 #PictureOfTheDay h4{
   margin-top:-7px;
+  font-size: 28px;
+}
+
+@media(max-width:600px){
+  #PictureOfTheDay h4{
+    font-size:20px;
+  }
 }
 
 #PictureOfTheDay img{
@@ -92,22 +112,55 @@ nav ul li:hover {
 * Curiosity 
 *
 */
-.Curiosity{
+#Curiosity{
   margin: 90px 50px;
 }
 
-.Curiosity  .card {
+#Curiosity h2{
+  color:#162252;
+  /*margin-left:10px;*/
+  font-size:23px;
+  letter-spacing: 6px; 
+}
+#Curiosity .introduction{
+    margin-bottom: 48px;
+}
+#Curiosity .introduction-content {
+  font-size: 16px;
+  color: #bdbdbd;
+}
+#Curiosity .introduction-content .important-content{
+  color:rgba(22, 34, 82, 0.6);
+  font-weight: 600;
+}
+#Curiosity .hr-top{
+    width: 210px;
+    margin-left: 0;
+    height: 2px;
+    background-color: rgba(22, 34, 82, 0.8);
+    margin-bottom:20px;
+}
+
+#Curiosity .hr-bottom{
+    width: 210px;
+    margin-right: 0;
+    height: 2px;
+    background-color: rgba(22, 34, 82, 0.8);
+    margin-top:10px;
+}
+
+#Curiosity  .card {
   border-radius: 12px;
 }
 
-.Curiosity .card img {
+#Curiosity .card img {
   border-radius: 12px 12px 0 0;
 }
 
-.Curiosity .card .card-reveal{
+#Curiosity .card .card-reveal{
    border-radius:12px; 
 }
-input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+#input-date {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid;
@@ -123,6 +176,13 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
     color: #162252;
     transition: all 0.3s;
 }
+
+@media (max-width: 600px) {
+  #input-date {
+    font-size:17px;
+  }
+}
+
 
 .failJSON{
   text-align:center;

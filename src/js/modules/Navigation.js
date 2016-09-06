@@ -52,60 +52,37 @@ var Navigation = React.createClass(
 				};
 
 			return (
-					<div className="container-fluid" ref={this.initNavigation}>
-					<nav className='Navigation'>
-					    <div className="nav-wrapper">
-					      <a href="#!" className="brand-logo left">Nasa - Project</a>
-					      <ul className="right hide-on-med-and-down">
-					        {this.createContent()}
-					      </ul>
-					       <ul className="side-nav" id="mobile-demo">
-					        <li><a href="sass.html">Sass</a></li>
-					        <li><a href="badges.html">Components</a></li>
-					        <li><a href="collapsible.html">Javascript</a></li>
-					        <li><a href="mobile.html">Mobile</a></li>
-				      	  </ul>
-					    </div>
-					</nav>
-					<div className="row">
-						<div className="header-image" style={headerImgStyle}></div>
+					
+					<div className="container-fluid">
+						<nav className='Navigation'>
+						    <div className="nav-wrapper">
+						      <a href="#!" className="brand-logo">Nasa - Project</a>
+						      <a href="#" data-activates="mobile-demo" className="button-collapse" ref={this.initNavbar}><i className="material-icons">menu</i></a>
+						      <ul className="right hide-on-med-and-down">
+						      	{/*List for large screen*/}
+						        {this.createContent()}
+						      </ul>
+						       <ul className="side-nav" id="mobile-demo">
+						   		{/*List for mobile phone*/}
+						        {this.createContent()}
+					      	  </ul>
+						    </div>
+						</nav>
+						<div className="row">
+							<div className="header-image" style={headerImgStyle}></div>
+						</div>
 					</div>
-				</div>
 			)
 		},
 		initNavbar: function (element) {
-			$(element).slideNav();
+			$(element).sideNav({
+				menuWidth: 300, // Default is 240
+		        edge: 'right', // Choose the horizontal origin
+				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			});
 		}
 	}
 
 )
 module.exports = Navigation; 
-
-
-/*
-	
-
-
-
-					<nav>
-				    <div className="nav-wrapper" ref={this.initNavbar}>
-				      <a href="#!" className="brand-logo">Logo</a>
-				      <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-				      <ul className="right hide-on-med-and-down">
-				        <li><a href="sass.html">Sass</a></li>
-				        <li><a href="badges.html">Components</a></li>
-				        <li><a href="collapsible.html">Javascript</a></li>
-				        <li><a href="mobile.html">Mobile</a></li>
-				      </ul>
-				      <ul className="side-nav" id="mobile-demo">
-				        <li><a href="sass.html">Sass</a></li>
-				        <li><a href="badges.html">Components</a></li>
-				        <li><a href="collapsible.html">Javascript</a></li>
-				        <li><a href="mobile.html">Mobile</a></li>
-				      </ul>
-				    </div>
-				  </nav>
-*/
-
-  
 

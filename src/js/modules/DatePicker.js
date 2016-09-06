@@ -52,7 +52,14 @@ var DatePicker = React.createClass(
 		render: function () {
 			return(
 				<div>
-					<input id="input-date" type="date" className="datepicker" placeholder={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker}/>
+					<input id="input-date" type="date" className="datepicker" placeholder={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker} />
+					<div className="row">
+						<select name="select">
+						  <option value="value1">Valeur 1</option> 
+						  <option value="value2" selected>Valeur 2</option>
+						  <option value="value3">Valeur 3</option>
+						</select>
+					</div>
 					<div className="row">
 						<button className="waves-effect waves-light btn" onClick={this.handleClick}>Search</button>
 					</div>

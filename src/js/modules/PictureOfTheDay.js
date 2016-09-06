@@ -31,7 +31,9 @@ var PictureOfTheDay = React.createClass({
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
-					<h2>Picture of the day</h2>
+					<div className="col s12 m4">
+						<h2>Picture of the day</h2>
+					</div>
 				</div>
 				<div className="row">
 					<div className="col s12 m6">
