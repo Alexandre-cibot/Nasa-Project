@@ -11,52 +11,9 @@ var Curiosity = React.createClass(
 				failJSON: false,
 				cardsArray: [],
 				earth_date_chosen: '2016-09-01',
-				max_date:'2016-09-01'
+				max_date:'2016-09-01',
+				picsNumber: 20
 			}
-		},
-		componentWillMount: function () {
-
-				// Getting the JSON from the API automatically
-				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 	console.log('Initial JSON Taking');
-				 	//We check if there is there the newest photos from the rover.
-				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
-				 		console.log('No update needed !');
-				 		console.log(result);
-				 		that.setState({data: result});
-	             		that.setState({showImages: true});
-				 	}
-				 	else{
-				 		// We get the newest JSON file.
-				 		 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + result.photos[0].rover.max_date + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 		 	console.log('Update well succeed');
-				 		 	console.log(result);
-				 		 	that.setState({data: result});
-				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
-				 		 	that.setState({max_date: result.photos[0].rover.max_date});
-				 		 	that.setState({showImages: true});
-				 		 });
-				 	}
-				});
-		},
-		updateJSON: function (newDate) {
-			//We make a new request when the user change the Date. 
-				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + newDate + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 	console.log(result);
-				 	that.setState({data: result});
-				 	that.setState({earth_date_chosen: newDate});
-				 	// we say that the JSON hasn't failed. 
-				 	that.state.failJSON == true ? false : null
-	             	that.setState({showImages: true});
-				 	
-				})
-				 .fail(function(){
-				 	// ex: 9 june 2014, there is no pictures for that day. 
-				 	console.log('Impossible to reach');	
-				 	that.setState({failJSON: true});
-				 });
 		},
 
 		months : {
@@ -73,23 +30,100 @@ var Curiosity = React.createClass(
 				'11': 'November',
 				'12': 'December'
 		},
+		introduction_content: function () {
+			//Storage for Introduction textual content
+			return (
+				<div className="introduction">
+							<hr className="hr-top"/>
+								<span className="introduction-content">
+									Curiosity is a car-sized robotic rover exploring <b>Gale Crater</b> on <b>Mars</b> as part of <b>NASA's Mars Science Laboratory mission</b> (MSL).<br /> And this is what it does since landing on <b>August 6, 2012</b>. 
+
+									Curiosity was launched from Cape Canaveral on <b>November 26, 2011</b> aboard the MSL spacecraft.
+									<br />
+									<b>What a journey !</b> After 563,000,000 km (350,000,000 mi) and 2080 days, so more than 5 years, Curiosity has reached the red planet. <br />
+
+									The rover's goals include: investigation of the Martian climate and geology assessment of whether the selected field site inside Gale Crater has ever offered environmental conditions favorable for microbial life, including investigation of the role of water; and planetary habitability studies in preparation for future human exploration.<br />
+									<span className="important-content">Curiosity takes picture everyday, we receive those pictures with ~3 days delay. This page has been created to let you see those all pictures. Click on the Date Picker to select the date you want.</span>
+								</span>
+								<hr className="hr-bottom"/>
+				</div>
+			)
+		},
+		componentWillMount: function () {
+
+				// Getting the JSON from the API automatically
+				var that = this; 
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 	console.log('Initial JSON Taking');
+				 	//We check if there is there the newest photos from the rover.
+				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
+				 		console.log('No update needed !');
+				 		that.setState({data: result});
+	             		that.setState({showImages: true});
+	             		that.props.handleFooter(true);
+				 	}
+				 	else{
+				 		// We get the newest JSON file.
+				 		 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + result.photos[0].rover.max_date + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 		 	console.log('Update well succeed');
+				 		 	that.setState({data: result});
+				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
+				 		 	that.setState({max_date: result.photos[0].rover.max_date});
+				 		 	that.setState({showImages: true});
+				 		 	that.props.handleFooter(true);
+				 		 });
+				 	}
+				});
+		},
+		updateJSON: function (newDate) {
+			//We make a new request when the user change the Date. 
+				var that = this; 
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + newDate + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 	that.setState({data: result});
+				 	that.setState({earth_date_chosen: newDate});
+
+				 	// we say that the JSON hasn't failed. 
+				 	
+				 	if(that.state.failJSON == true){
+				 		that.setState({failJSON: false})
+				 	}
+	             	that.setState({showImages: true});
+
+	             	that.props.handleFooter(true);
+				 	
+				})
+				 .fail(function(){
+				 	// ex: 9 june 2014, there is no pictures for that day. 	
+				 	that.setState({failJSON: true});
+				 });
+		},
 		dateFormatFR : function (date) {
 			//French Format, more readable !
 			// Initialy format date : year-mouth-day, ex : 2016-09-01 
 			//This is the format that we want : 1 September 2016. 
 			date = date.split('-');
-			var newDate = date[2] + " " + this.months[date[1]] + " " + date[0];
+			var newDate = date[2] + " " + this.months[date[1]] + ", " + date[0];
 			return newDate;
 		},
 		handleChangeDate: function (newDate) {
 			this.setState({showImages:false});
+			this.props.handleFooter(false);
 			this.updateJSON(newDate);
 		
 		},
+		handleChangePicsNumber: function (number) {
+			if(number !== this.state.picsNumber){
+				this.setState({picsNumber: number});
+			}
+			else{
+				console.log('Cest deja le bon nombre')
+			}
+		},
 		handleJSONFailed: function (){
-			console.log('Impossible to reach');
+			console.log('Impossible to reach data, because they doesn\'t exist yet');
 			var that = this;
 			var handleClick = function () {
+				//We handle the click for return back
 				console.log('Go Back');
 				return that.updateJSON(that.state.max_date);
 			}
@@ -114,7 +148,7 @@ var Curiosity = React.createClass(
 
 			};
 
-			for(var i = 0; i < cardsLimit(this.state.data.photos.length, 50); i++){
+			for(var i = 0; i < cardsLimit(this.state.data.photos.length, this.state.picsNumber); i++){
 				cards.push(
 					<div className="col m2" key={i}>
 							<div className="card">
@@ -144,22 +178,27 @@ var Curiosity = React.createClass(
 		},
 		displayContent: function () {
 			return (
-				<div className="Curiosity">
-					<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} handleChangeDate={this.handleChangeDate}/>
+				<div id="Curiosity">
 					<div className="row">
-		      			
-		      				{this.generateCards()}
-		      			
-
+						<div className="col s12 m8 push-m2">
+							<h2>Curiosity</h2>
+							{this.introduction_content()}
+						</div>
+					</div>
+					<div className="row">
+						<div className="col s12">
+							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={this.state.data.photos.length} picsNumber={this.state.picsNumber}/>
+						</div>
+					</div>
+					<div className="row">
+		      			{this.generateCards()}
 	      			</div>
-
 	      		</div>
 			)
 		},
 		render: function () {
 			//Everything goes well
 			if(this.state.showImages == true){
-				console.log('There is a rendeeeerr with images');
 				console.log('current Date : ' + this.state.earth_date_chosen);
 				return (this.displayContent())
 			}
@@ -171,8 +210,13 @@ var Curiosity = React.createClass(
 			else{
 				console.log('Chargement des images ...');
 				return(
-					<div>
-						<p className="loadingImages">Chargement ...<img src="../src/img/loader.gif"/></p>
+					<div className="row">
+						<div className="col s6 offset-s3">
+							<p className="loadingImages">Chargement ...
+								<img src="../src/img/loader.gif"/>
+							</p>
+						</div>
+			
 					</div>
 				)
 			}

@@ -4,6 +4,7 @@
 * GLOBAL
 *
 */
+
 blockquote {
     margin: 20px 0;
     padding-left: 1.5rem;
@@ -11,8 +12,14 @@ blockquote {
 }
 
 .header-image{
-  border:1px solid black; 
+
   height:200px;
+}
+
+@media(max-width:600px){
+  .header-image{
+    height:100px;
+  }
 }
 
 .explanation{
@@ -31,12 +38,12 @@ nav .brand-logo {
     position: absolute;
     color: #fff;
     display: inline-block;
-    font-size: 2.1rem;
+    font-size: 17px;
     padding-left: 17px;
     white-space: nowrap;
 }
 .Navigation{
-  background-color:#162252;
+  background-color:rgba(22, 34, 82, 0.8);
   padding: 0 30px;
   letter-spacing: 2px;
 }
@@ -47,7 +54,7 @@ nav ul li.active {
 
 nav ul li:hover {
   background: rgba(255,255,255,0.2);
-};
+}
 
 /*
 *
@@ -55,24 +62,31 @@ nav ul li:hover {
 * Picture Of The Day
 *
 */
-#PictureOfTheDay{
-      box-shadow: 15px 11px 10px 8px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+#PictureOfTheDay h2{
+  color:#162252;
+  /*margin-left:10px;*/
+  font-size:23px;
+  letter-spacing: 6px; 
 }
-#PictureOfTheDay.card{
-    position: relative;
-    margin: 0.5rem 0 1rem 0;
-    background-color: #fff;
-    transition: box-shadow .25s;
-    border-radius: 20px;
+@media(max-width:600px){
+  #PictureOTheDay h2{
+    font-size:28px;
+  }
 }
-
-#PictureOfTheDay.card img {
-  border-radius: 20px 20px 0 0; 
-}
-#PictureOfTheDay .card-reveal{
-  border-radius:20px; 
+#PictureOfTheDay h4{
+  margin-top:-7px;
+  font-size: 28px;
 }
 
+@media(max-width:600px){
+  #PictureOfTheDay h4{
+    font-size:20px;
+  }
+}
+
+#PictureOfTheDay img{
+  margin-bottom:30px;
+}
 
 /*
 *
@@ -81,10 +95,11 @@ nav ul li:hover {
 *
 */
 .loadingImages{
-  position: absolute;
+/*  position: absolute;
     left: 44%;
-    top: 30%;
-    font-size: 30px;
+    top: 30%;*/
+    text-align:center;
+    font-size: 20px;
 }
 
 .loadingImages img {
@@ -97,22 +112,68 @@ nav ul li:hover {
 * Curiosity 
 *
 */
-.Curiosity{
+#Curiosity{
   margin: 90px 50px;
 }
 
-.Curiosity  .card {
-  border-radius: 12px;
+#Curiosity h2{
+  color:#162252;
+  /*margin-left:10px;*/
+  font-size:23px;
+  letter-spacing: 6px; 
+}
+#Curiosity .introduction{
+    margin-bottom: 48px;
+}
+#Curiosity .introduction-content {
+  font-size: 16px;
+  color: #bdbdbd;
+}
+@media(max-width:600px){
+  #Curiosity .introduction-content{
+      font-size: 11px;
+  }
 }
 
-.Curiosity .card img {
+#Curiosity .introduction-content .important-content{
+  color:rgba(22, 34, 82, 0.6);
+  font-weight: 600;
+}
+#Curiosity .hr-top{
+    width: 210px;
+    margin-left: 0;
+    height: 2px;
+    background-color: rgba(22, 34, 82, 0.8);
+    margin-bottom:20px;
+}
+
+#Curiosity .hr-bottom{
+    width: 210px;
+    margin-right: 0;
+    height: 2px;
+    background-color: rgba(22, 34, 82, 0.8);
+    margin-top:10px;
+}
+
+#Curiosity  .card {
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+@media(max-width:600px){
+  #Curiosity .card{
+    font-size: 10px;
+  }
+}
+
+#Curiosity .card img {
   border-radius: 12px 12px 0 0;
 }
 
-.Curiosity .card .card-reveal{
+#Curiosity .card .card-reveal{
    border-radius:12px; 
 }
-input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+#input-date {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid;
@@ -129,6 +190,13 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
     transition: all 0.3s;
 }
 
+@media (max-width: 600px) {
+  #input-date {
+    font-size:17px;
+  }
+}
+
+
 .failJSON{
   text-align:center;
 }
@@ -140,6 +208,17 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 }
 .failJSON a {
   margin: 22px 0;
+}
+/** fail phone**/
+@media(max-width:600px){
+  .failJSON img {
+    margin-left: -40px;
+    width: 240px;
+  }
+  .failJSON h3 {
+      font-size: 21px;
+  }
+
 }
 
 .btn, .btn-large {
@@ -174,3 +253,19 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
     padding: 0 1rem;
     color: #90caf9;
 }
+#dropdown{
+  font-size:27px;
+}
+
+/*footer*/
+
+#footer{
+  background-color:rgba(22, 34, 82, 0.8);
+  margin-top: 120px;
+  display:;
+}
+#footer p{
+  letter-spacing: 0.5px;
+}
+
+

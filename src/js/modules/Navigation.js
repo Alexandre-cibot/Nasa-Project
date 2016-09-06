@@ -13,9 +13,11 @@ var Navigation = React.createClass(
 			}
 		},
 		listenClick: function (activeLink) {
+			this.props.handleFooter(false);
 			console.log(activeLink)
 			this.setState({activeLink: activeLink});
 			this.props.handleClick(activeLink);
+
 
 			//this.setState({headerImgSrc: activeLink})
 	
@@ -50,25 +52,37 @@ var Navigation = React.createClass(
 				};
 
 			return (
-				<div className="container-fluid">
-					<nav className='Navigation'>
-					    <div className="nav-wrapper">
-					      <a href="#!" className="brand-logo left">Nasa - Project</a>
-					      <ul className="right">
-					        {this.createContent()}
-					      </ul>
-					    </div>
-					</nav>
-					<div className="row">
-						<div className="header-image" style={headerImgStyle}></div>
+					
+					<div className="container-fluid">
+						<nav className='Navigation'>
+						    <div className="nav-wrapper">
+						      <a href="#!" className="brand-logo">Nasa - Project</a>
+						      <a href="#" data-activates="mobile-demo" className="button-collapse" ref={this.initNavbar}><i className="material-icons">menu</i></a>
+						      <ul className="right hide-on-med-and-down">
+						      	{/*List for large screen*/}
+						        {this.createContent()}
+						      </ul>
+						       <ul className="side-nav" id="mobile-demo">
+						   		{/*List for mobile phone*/}
+						        {this.createContent()}
+					      	  </ul>
+						    </div>
+						</nav>
+						<div className="row">
+							<div className="header-image" style={headerImgStyle}></div>
+						</div>
 					</div>
-				</div>
 			)
+		},
+		initNavbar: function (element) {
+			$(element).sideNav({
+				menuWidth: 300, // Default is 240
+		        edge: 'right', // Choose the horizontal origin
+				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			});
 		}
 	}
+
 )
 module.exports = Navigation; 
-
-
-  
 
