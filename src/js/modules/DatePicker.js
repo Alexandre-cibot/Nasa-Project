@@ -46,6 +46,7 @@ var DatePicker = React.createClass(
 				console.log(newDate);
 				this.props.changeDate(newDate);
 				this.props.changePicsNumber(numberOfPics);
+				this.props.launchCards();
 			}
 			else{
 				alert('Veuillez entrer une date'); 

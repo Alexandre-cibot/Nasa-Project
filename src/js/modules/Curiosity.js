@@ -1,5 +1,7 @@
+
 var React = require('react');
 var DatePicker = require('./DatePicker');
+var Cards = require('./Cards');
 
 //TODO : Il faudra bien entendu rendre la requete Dynamique, afin que les photos ne soient pas toujours les mêmes.
 var Curiosity = React.createClass(
@@ -7,28 +9,11 @@ var Curiosity = React.createClass(
 		getInitialState: function () {
 			return {
 				data : {},
-				showImages: false,
-				failJSON: false,
-				cardsArray: [],
+				showCards: false,
+				JSONLoad: false,
 				earth_date_chosen: '2016-09-01',
-				max_date:'2016-09-01',
-				picsNumber: 20
+				max_date:'2016-09-01'
 			}
-		},
-
-		months : {
-				'01':  'January',
-				'02':  'Februry',
-				'03':  'March',
-				'04':  'April',
-				'05':  'May',
-				'06':  'June',
-				'07':  'July',
-				'08':  'August',
-				'09':  'September',
-				'10': 'October',
-				'11': 'November',
-				'12': 'December'
 		},
 		introduction_content: function () {
 			//Storage for Introduction textual content
@@ -59,7 +44,6 @@ var Curiosity = React.createClass(
 				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
 				 		console.log('No update needed !');
 				 		that.setState({data: result});
-	             		that.setState({showImages: true});
 	             		that.props.handleFooter(true);
 				 	}
 				 	else{
@@ -69,33 +53,28 @@ var Curiosity = React.createClass(
 				 		 	that.setState({data: result});
 				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
 				 		 	that.setState({max_date: result.photos[0].rover.max_date});
-				 		 	that.setState({showImages: true});
 				 		 	that.props.handleFooter(true);
 				 		 });
 				 	}
+
+				 	 that.setState({JSONLoad: true})
+
 				});
+
 		},
-		updateJSON: function (newDate) {
-			//We make a new request when the user change the Date. 
-				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + newDate + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
-				 	that.setState({data: result});
-				 	that.setState({earth_date_chosen: newDate});
-
-				 	// we say that the JSON hasn't failed. 
-				 	
-				 	if(that.state.failJSON == true){
-				 		that.setState({failJSON: false})
-				 	}
-	             	that.setState({showImages: true});
-
-	             	that.props.handleFooter(true);
-				 	
-				})
-				 .fail(function(){
-				 	// ex: 9 june 2014, there is no pictures for that day. 	
-				 	that.setState({failJSON: true});
-				 });
+		months : {
+				'01':  'January',
+				'02':  'Februry',
+				'03':  'March',
+				'04':  'April',
+				'05':  'May',
+				'06':  'June',
+				'07':  'July',
+				'08':  'August',
+				'09':  'September',
+				'10': 'October',
+				'11': 'November',
+				'12': 'December'
 		},
 		dateFormatFR : function (date) {
 			//French Format, more readable !
@@ -106,9 +85,10 @@ var Curiosity = React.createClass(
 			return newDate;
 		},
 		handleChangeDate: function (newDate) {
-			this.setState({showImages:false});
-			this.props.handleFooter(false);
-			this.updateJSON(newDate);
+			this.setState({showCards:false});
+			//this.props.handleFooter(false);
+			//this.updateJSON(newDate);
+			this.setState({earth_date_chosen : newDate});
 		
 		},
 		handleChangePicsNumber: function (number) {
@@ -119,107 +99,51 @@ var Curiosity = React.createClass(
 				console.log('Cest deja le bon nombre')
 			}
 		},
-		handleJSONFailed: function (){
-			console.log('Impossible to reach data, because they doesn\'t exist yet');
-			var that = this;
-			var handleClick = function () {
-				//We handle the click for return back
-				console.log('Go Back');
-				return that.updateJSON(that.state.max_date);
+		handleGlobalCards: function () {
+			if(this.state.showCards == true){
+				console.log('We display Cards');
+				return <Cards data={this.state.data} earth_date_chosen={this.state.earth_date_chosen} picsNumber={this.state.picsNumber} dateFormatFR={this.dateFormatFR}/>
 			}
+			else{
+				console.log('No display cards');
+				return <p>On n'affiche pas de cartes</p>
+			}
+			
+		},
+		launchCards: function () {
+			this.setState({showCards: true});
+		},
+		showCuriosity: function () {
+			if(this.state.JSONLoad === true){
+				console.log('current Date : ' + this.state.earth_date_chosen);
+				//console.log(this.state.data.photos.length);
 				return (
-					<div className="failJSON">
-						<img src="../src/img/alien.gif"/>
-						<h3>I'm affraid, there is no photos at this date.</h3>
-						<a href="#" onClick={handleClick}className="waves-effect waves-light btn btn-large"><i className="material-icons right">replay</i>Back</a>
-					</div>
-				)
-		},
-
-		imagesCharged: function () {
-			this.state.data.photos !== undefined ? true : false;
-		},
-		generateCards: function () {
-			// We generate as many cards as we need. With a limit of 100. (to be sure)
-			var cards = [];
-			var cardsLimit = function (numberOfPhotos, limit) {
-				// Return the number of photos, width a maximum limit
-				return numberOfPhotos <= limit ?  numberOfPhotos : limit; 
-
-			};
-
-			for(var i = 0; i < cardsLimit(this.state.data.photos.length, this.state.picsNumber); i++){
-				cards.push(
-					<div className="col m2" key={i}>
-							<div className="card">
-								<div className="card-image waves-light">
-									<img className="materialboxed" src={this.state.data.photos[i].img_src} ref={this.initMaterialBox}/>
-								</div>
-								<div className="card-content">
-									<span className="card-title activator grey-text text-darken-4">Title<i className="material-icons right">more_vert</i></span>
-									<p>Date : {this.dateFormatFR(this.state.data.photos[i].earth_date)}</p>
-									<br />
-									<p><a className="activator">More infos ..</a></p>
-								</div>
-								<div className="card-reveal">
-									<span className="card-title grey-text text-darken-4">Title<i className="material-icons right">close</i></span>
-										<blockquote className="explanation">
-											<p><b>Rover : </b>{this.state.data.photos[i].rover.name}</p>
-											<p><b>Camera : </b>{this.state.data.photos[i].camera.full_name}, ("{this.state.data.photos[i].camera.name}")</p>
-											<p>This photo has been taken the {this.dateFormatFR(this.state.data.photos[i].earth_date)}</p>
-											<p> Last photo taken by this Curiosity rover : {this.dateFormatFR(this.state.data.photos[i].rover.max_date)}</p>
-										</blockquote>
-								</div>
+					<div id="Curiosity">
+						<div className="row">
+							<div className="col s12 m8 push-m2">
+								<h2>Curiosity</h2>
+								{this.introduction_content()}
 							</div>
-					</div>
-					)
+						</div>
+						<div className="row">
+							<div className="col s12">
+								<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date}  months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={25} picsNumber={this.state.picsNumber} dateFormatFR={this.dateFormatFR} launchCards={this.launchCards} months={this.months}/>
+							</div>
+						</div>
+						<div className="row">
+							{this.handleGlobalCards()}
+		      			</div>
+		      		</div>
+		      	);
 			}
-			return cards; 
-		},
-		displayContent: function () {
-			return (
-				<div id="Curiosity">
-					<div className="row">
-						<div className="col s12 m8 push-m2">
-							<h2>Curiosity</h2>
-							{this.introduction_content()}
-						</div>
-					</div>
-					<div className="row">
-						<div className="col s12">
-							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={this.state.data.photos.length} picsNumber={this.state.picsNumber}/>
-						</div>
-					</div>
-					<div className="row">
-		      			{this.generateCards()}
-	      			</div>
-	      		</div>
-			)
+			else{
+				return (<p>Chargement</p>)
+			}
 		},
 		render: function () {
 			//Everything goes well
-			if(this.state.showImages == true){
-				console.log('current Date : ' + this.state.earth_date_chosen);
-				return (this.displayContent())
-			}
-			//The date return no photos
-			else if (this.state.failJSON == true){
-				return this.handleJSONFailed(); 
-			}
-			//The data is charging
-			else{
-				console.log('Chargement des images ...');
-				return(
-					<div className="row">
-						<div className="col s6 offset-s3">
-							<p className="loadingImages">Chargement ...
-								<img src="../src/img/loader.gif"/>
-							</p>
-						</div>
-			
-					</div>
-				)
-			}
+				
+				return this.showCuriosity();
 		},
 		initMaterialBox: function (element) {
 			//Required for datePicker
@@ -229,4 +153,3 @@ var Curiosity = React.createClass(
 )
 
 module.exports = Curiosity; 
-
