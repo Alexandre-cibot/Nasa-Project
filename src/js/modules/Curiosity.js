@@ -12,7 +12,7 @@ var Curiosity = React.createClass(
 				cardsArray: [],
 				earth_date_chosen: '2016-09-01',
 				max_date:'2016-09-01',
-				picsNumber: 10
+				picsNumber: 20
 			}
 		},
 
@@ -43,7 +43,7 @@ var Curiosity = React.createClass(
 									<b>What a journey !</b> After 563,000,000 km (350,000,000 mi) and 2080 days, so more than 5 years, Curiosity has reached the red planet. <br />
 
 									The rover's goals include: investigation of the Martian climate and geology assessment of whether the selected field site inside Gale Crater has ever offered environmental conditions favorable for microbial life, including investigation of the role of water; and planetary habitability studies in preparation for future human exploration.<br />
-									<span className="important-content">Curiosity takes picture everyday, this page has been created to let you see those all pictures. Click on the Date Picker to select the date you want.</span>
+									<span className="important-content">Curiosity takes picture everyday, we receive those pictures with ~3 days delay. This page has been created to let you see those all pictures. Click on the Date Picker to select the date you want.</span>
 								</span>
 								<hr className="hr-bottom"/>
 				</div>
@@ -187,7 +187,7 @@ var Curiosity = React.createClass(
 					</div>
 					<div className="row">
 						<div className="col s12">
-							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={this.state.data.photos.length}/>
+							<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date} dateFormatFR={this.dateFormatFR} months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={this.state.data.photos.length} picsNumber={this.state.picsNumber}/>
 						</div>
 					</div>
 					<div className="row">

@@ -129,6 +129,12 @@ nav ul li:hover {
   font-size: 16px;
   color: #bdbdbd;
 }
+@media(max-width:600px){
+  #Curiosity .introduction-content{
+      font-size: 11px;
+  }
+}
+
 #Curiosity .introduction-content .important-content{
   color:rgba(22, 34, 82, 0.6);
   font-weight: 600;
@@ -151,6 +157,13 @@ nav ul li:hover {
 
 #Curiosity  .card {
   border-radius: 12px;
+  font-size: 13px;
+}
+
+@media(max-width:600px){
+  #Curiosity .card{
+    font-size: 10px;
+  }
 }
 
 #Curiosity .card img {
@@ -195,6 +208,17 @@ nav ul li:hover {
 }
 .failJSON a {
   margin: 22px 0;
+}
+/** fail phone**/
+@media(max-width:600px){
+  .failJSON img {
+    margin-left: -40px;
+    width: 240px;
+  }
+  .failJSON h3 {
+      font-size: 21px;
+  }
+
 }
 
 .btn, .btn-large {
@@ -243,6 +267,5 @@ nav ul li:hover {
 #footer p{
   letter-spacing: 0.5px;
 }
-
 
 
