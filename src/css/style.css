@@ -236,6 +236,11 @@ nav ul li:hover {
 }
 
 /* Date picker */
+
+#DatePicker label{
+    font-size: 14px;
+    color: #9e9e9e;
+}
 .picker__date-display {
     text-align: center;
     background-color: #90caf9;

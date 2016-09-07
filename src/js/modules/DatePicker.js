@@ -57,12 +57,16 @@ var DatePicker = React.createClass(
 				for(let i = 10; i <= 20; i+=10){
 				    options.push(<option key={i} value={i}>{i}</option>);
 				}
-				options.push(<option key={maxPics} value={maxPics}>{maxPics}</option>)
+				options.push(<option key={maxPics} value={maxPics}>Show all</option>)
 				return (
-					 <select id="dropdown" defaultValue={this.state.picsNumber}>
-				        <option disabled>Number of pictures displayed</option>
-				        {options}
-				     </select>
+					<div>
+						<label>Pictures' number</label>
+					 	<select id="dropdown" defaultValue={this.state.picsNumber}>
+					        <option disabled>Number of pictures displayed</option>
+					        {options}
+				     	</select>
+					</div>
+					
 				)
 		},
 		componentDidMount: function () {
@@ -74,7 +78,8 @@ var DatePicker = React.createClass(
 		},
 		render: function () {
 			return(
-				<div>
+				<div id="DatePicker">
+					<label>Choose a date</label>
 					<input id="input-date" type="text" className="datepicker" defaultValue={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker}  />
 					<div className="row">
 					{/* Number of pictures displayed */}
