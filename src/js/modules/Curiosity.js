@@ -12,7 +12,8 @@ var Curiosity = React.createClass(
 				showCards: false,
 				JSONLoad: false,
 				earth_date_chosen: '2016-09-01',
-				max_date:'2016-09-01'
+				max_date:'2016-09-01',
+				picsNumber: 20
 			}
 		},
 		introduction_content: function () {
@@ -38,13 +39,15 @@ var Curiosity = React.createClass(
 
 				// Getting the JSON from the API automatically
 				var that = this; 
-				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result)
+				 {
 				 	console.log('Initial JSON Taking');
 				 	//We check if there is there the newest photos from the rover.
 				 	if(result.photos[0].rover.max_date == that.state.earth_date_chosen){
 				 		console.log('No update needed !');
 				 		that.setState({data: result});
 	             		that.props.handleFooter(true);
+	             		that.setState({JSONLoad: true})
 				 	}
 				 	else{
 				 		// We get the newest JSON file.
@@ -54,11 +57,11 @@ var Curiosity = React.createClass(
 				 		 	that.setState({earth_date_chosen: result.photos[0].rover.max_date})
 				 		 	that.setState({max_date: result.photos[0].rover.max_date});
 				 		 	that.props.handleFooter(true);
+				 		 	that.setState({JSONLoad: true})
 				 		 });
 				 	}
 
-				 	 that.setState({JSONLoad: true})
-
+				 	 
 				});
 
 		},
@@ -85,7 +88,7 @@ var Curiosity = React.createClass(
 			return newDate;
 		},
 		handleChangeDate: function (newDate) {
-			this.setState({showCards:false});
+			this.setState({showCards: false});
 			//this.props.handleFooter(false);
 			//this.updateJSON(newDate);
 			this.setState({earth_date_chosen : newDate});
@@ -101,12 +104,12 @@ var Curiosity = React.createClass(
 		},
 		handleGlobalCards: function () {
 			if(this.state.showCards == true){
-				console.log('We display Cards');
-				return <Cards data={this.state.data} earth_date_chosen={this.state.earth_date_chosen} picsNumber={this.state.picsNumber} dateFormatFR={this.dateFormatFR}/>
-			}
-			else{
-				console.log('No display cards');
-				return <p>On n'affiche pas de cartes</p>
+				//console.log('We display Cards');
+				return <Cards 
+						earth_date_chosen={this.state.earth_date_chosen}
+						picsNumber={this.state.picsNumber}
+						dateFormatFR={this.dateFormatFR}
+						/>
 			}
 			
 		},
@@ -115,9 +118,7 @@ var Curiosity = React.createClass(
 		},
 		showCuriosity: function () {
 			if(this.state.JSONLoad === true){
-				console.log('current Date : ' + this.state.earth_date_chosen);
-				//console.log(this.state.data.photos.length);
-				return (
+					return (
 					<div id="Curiosity">
 						<div className="row">
 							<div className="col s12 m8 push-m2">
@@ -127,7 +128,17 @@ var Curiosity = React.createClass(
 						</div>
 						<div className="row">
 							<div className="col s12">
-								<DatePicker currentDate={this.state.earth_date_chosen} max_date={this.state.max_date}  months={this.months} changeDate={this.handleChangeDate} changePicsNumber={this.handleChangePicsNumber} maxPics={25} picsNumber={this.state.picsNumber} dateFormatFR={this.dateFormatFR} launchCards={this.launchCards} months={this.months}/>
+								<DatePicker
+									currentDate={this.state.earth_date_chosen}
+									max_date={this.state.max_date}
+									months={this.months}
+									changeDate={this.handleChangeDate}
+									changePicsNumber={this.handleChangePicsNumber}
+									maxPics={25} picsNumber={this.state.picsNumber}
+									dateFormatFR={this.dateFormatFR}
+									launchCards={this.launchCards}
+									months={this.months}
+								/>
 							</div>
 						</div>
 						<div className="row">
@@ -137,12 +148,22 @@ var Curiosity = React.createClass(
 		      	);
 			}
 			else{
-				return (<p>Chargement</p>)
+				console.log('Chargement de la page Curiosity');
+				return(
+					<div className="row">
+						<div className="col s6 offset-s3">
+							<p className="loadingImages">Chargement ...
+								<img src="../src/img/loader.gif"/>
+							</p>
+						</div>
+			
+					</div>
+				)
 			}
 		},
 		render: function () {
 			//Everything goes well
-				
+				console.log("ShowCards ? : " + this.state.showCards)
 				return this.showCuriosity();
 		},
 		initMaterialBox: function (element) {

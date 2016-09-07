@@ -6,18 +6,19 @@ var Cards= React.createClass(
 	{
 		getInitialState: function () {
 			return {
-				data : this.props.data,
+				data : {},
 				showImages: false,
 				failJSON: false,
 				cardsArray: [],
 				earth_date_chosen: this.props.earth_date_chosen,
 				max_date: this.props.max_date,
-				picsNumber: 20
+				picsNumber: this.props.picsNumber
 			}
 		},
 		
 		componentWillMount: function () {
 			//We make a new request when the user change the Date. 
+			console.log('WE DO IT AGAIIIIIIn')
 				var that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	that.setState({data: result});
@@ -36,20 +37,47 @@ var Cards= React.createClass(
 				 	that.setState({failJSON: true});
 				 });
 		},
-		
+		componentWillReceiveProps: function(nextProps) {
+			console.log('COMPONENT WILL RECEINVE')
+			//If the date has changed
+			if(nextProps.earth_date_chosen !== this.state.earth_date_chosen){
+
+				console.log('THINGS CHNAGE OMMGGG')
+				let that = this; 
+				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + nextProps.earth_date_chosen  + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
+				 	that.setState({data: result});
+				 	//that.setState({earth_date_chosen: newDate});
+
+				 	// we say that the JSON hasn't failed. 
+				 	
+				 	if(that.state.failJSON == true){
+				 		that.setState({failJSON: false})
+				 	}
+	             	that.setState({showImages: true});
+	             	that.setState({earth_date_chosen: nextProps.earth_date_chosen })
+	             	that.setState({picsNumber: nextProps.picsNumber})
+				 	
+				}).fail(function(){
+				 	// ex: 9 june 2014, there is no pictures for that day. 	
+				 	that.setState({showImages: false})
+				 	that.setState({failJSON: true});
+				 	console.log('Et meeeeerde')
+				 });
+			}
+			else if(nextProps.picsNumber !== this.state.picsNumber){
+				this.setState({picsNumber: nextProps.picsNumber});
+			}
+
+			
+
+		},
 		handleJSONFailed: function (){
 			console.log('Impossible to reach data, because they doesn\'t exist yet');
-			var that = this;
-			var handleClick = function () {
-				//We handle the click for return back
-				console.log('Go Back');
-				return that.setState({showImages: false});
-			}
 				return (
 					<div className="failJSON">
 						<img src="../src/img/alien.gif"/>
-						<h3>I'm affraid, there is no photos at this date.</h3>
-						<a href="#" onClick={handleClick}className="waves-effect waves-light btn btn-large"><i className="material-icons right">replay</i>Back</a>
+						<p>I'm affraid, there is no photos at this date.</p>
+						<h3>Try Again</h3>
 					</div>
 				)
 		},
@@ -113,7 +141,6 @@ var Cards= React.createClass(
 								<img src="../src/img/loader.gif"/>
 							</p>
 						</div>
-			
 					</div>
 				)
 			}

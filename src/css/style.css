@@ -200,11 +200,15 @@ nav ul li:hover {
 .failJSON{
   text-align:center;
 }
+.failJSON p {
+    color: #bdbdbd;
+    font-size: 18px;
+}
 .failJSON h3{
   color: #bdbdbd;
 }
 .failJSON img{
-  margin-left:-69px; 
+  margin-left:-103px; 
 }
 .failJSON a {
   margin: 22px 0;
@@ -253,8 +257,12 @@ nav ul li:hover {
     padding: 0 1rem;
     color: #90caf9;
 }
-#dropdown{
+.select-wrapper input.select-dropdown{
   font-size:27px;
+}
+
+.select-wrapper input.select-dropdown:after{
+  content:'Pictures';
 }
 
 /*footer*/

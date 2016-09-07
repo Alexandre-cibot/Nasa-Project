@@ -4,7 +4,8 @@ var DatePicker = React.createClass(
 	{
 		getInitialState: function () {
 			return {
-				date: null
+				date: null,
+				picsNumber: this.props.picsNumber
 			}
 		},
 		initDatePicker: function (element) {
@@ -15,6 +16,7 @@ var DatePicker = React.createClass(
 			    max: new Date(this.props.max_date),
 			    min: new Date(2012,(8-1), 6) // Rover's landing date. There is no picture before.
 			  });
+			  console.log(this.props.max_date + ' init datePicker')
 		},
 		dateFormatAPI: function (date) { 
 			//The date that we inital have is format like : 30 May, 1992
@@ -61,7 +63,7 @@ var DatePicker = React.createClass(
 				}
 				options.push(<option key={maxPics} value={maxPics}>{maxPics}</option>)
 				return (
-					 <select id="dropdown" defaultValue={this.props.picsNumber}>
+					 <select id="dropdown" defaultValue={this.state.picsNumber}>
 				        <option disabled>Number of pictures displayed</option>
 				        {options}
 				     </select>
@@ -74,10 +76,12 @@ var DatePicker = React.createClass(
 			    $('select').material_select();
 			  });
 		},
+
 		render: function () {
+			console.log('return DatePicker: max_date = ' + this.props.max_date);
 			return(
 				<div>
-					<input id="input-date" type="date" className="datepicker" value={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker} />
+					<input id="input-date" type="text" className="datepicker" defaultValue={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker}  />
 					<div className="row">
 					{/* Number of pictures displayed */}
 					{this.definePicsNumber()}
