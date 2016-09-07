@@ -16,7 +16,6 @@ var DatePicker = React.createClass(
 			    max: new Date(this.props.max_date),
 			    min: new Date(2012,(8-1), 6) // Rover's landing date. There is no picture before.
 			  });
-			  console.log(this.props.max_date + ' init datePicker')
 		},
 		dateFormatAPI: function (date) { 
 			//The date that we inital have is format like : 30 May, 1992
@@ -36,16 +35,13 @@ var DatePicker = React.createClass(
 			date[1] = date[1].substr(0, date[1].length -1);
 			date[1] = this.props.months.getKeyByValue(date[1]);
 			var newDate = date[2] + "-" + date[1] + "-" + date[0];
-			//console.log(newDate);
 			return newDate; 
 		},
-
 		handleClick: function () {
 			var content = $('#input-date').val(); 
 			var numberOfPics = $('#dropdown').val();
 			if(content.length !== 0 ){
 				var newDate = this.dateFormatAPI(content);
-				console.log(newDate);
 				this.props.changeDate(newDate);
 				this.props.changePicsNumber(numberOfPics);
 				this.props.launchCards();
@@ -76,9 +72,7 @@ var DatePicker = React.createClass(
 			    $('select').material_select();
 			  });
 		},
-
 		render: function () {
-			console.log('return DatePicker: max_date = ' + this.props.max_date);
 			return(
 				<div>
 					<input id="input-date" type="text" className="datepicker" defaultValue={this.props.dateFormatFR(this.props.currentDate)} ref={this.initDatePicker}  />

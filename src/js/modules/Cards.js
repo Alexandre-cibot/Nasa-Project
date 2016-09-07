@@ -14,23 +14,17 @@ var Cards= React.createClass(
 				max_date: this.props.max_date,
 				picsNumber: this.props.picsNumber
 			}
-		},
-		
+		},		
 		componentWillMount: function () {
 			//We make a new request when the user change the Date. 
-			console.log('WE DO IT AGAIIIIIIn')
 				var that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + this.state.earth_date_chosen + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	that.setState({data: result});
-				 	//that.setState({earth_date_chosen: newDate});
-
-				 	// we say that the JSON hasn't failed. 
 				 	
 				 	if(that.state.failJSON == true){
 				 		that.setState({failJSON: false})
 				 	}
-	             	that.setState({showImages: true});
-				 	
+	             	that.setState({showImages: true}); 	
 				})
 				 .fail(function(){
 				 	// ex: 9 june 2014, there is no pictures for that day. 	
@@ -38,17 +32,11 @@ var Cards= React.createClass(
 				 });
 		},
 		componentWillReceiveProps: function(nextProps) {
-			console.log('COMPONENT WILL RECEINVE')
 			//If the date has changed
 			if(nextProps.earth_date_chosen !== this.state.earth_date_chosen){
-
-				console.log('THINGS CHNAGE OMMGGG')
 				let that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + nextProps.earth_date_chosen  + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
 				 	that.setState({data: result});
-				 	//that.setState({earth_date_chosen: newDate});
-
-				 	// we say that the JSON hasn't failed. 
 				 	
 				 	if(that.state.failJSON == true){
 				 		that.setState({failJSON: false})
@@ -67,9 +55,6 @@ var Cards= React.createClass(
 			else if(nextProps.picsNumber !== this.state.picsNumber){
 				this.setState({picsNumber: nextProps.picsNumber});
 			}
-
-			
-
 		},
 		handleJSONFailed: function (){
 			console.log('Impossible to reach data, because they doesn\'t exist yet');
@@ -81,14 +66,12 @@ var Cards= React.createClass(
 					</div>
 				)
 		},
-
 		generateCards: function () {
 			// We generate as many cards as we need. With a limit of 100. (to be sure)
 			var cards = [];
 			var cardsLimit = function (numberOfPhotos, limit) {
 				// Return the number of photos, width a maximum limit
 				return numberOfPhotos <= limit ?  numberOfPhotos : limit; 
-
 			};
 
 			for(var i = 0; i < cardsLimit(this.state.data.photos.length, this.state.picsNumber); i++){
@@ -119,16 +102,14 @@ var Cards= React.createClass(
 			}
 			return (<div>{cards}</div>); 
 		},
-
 		render: function () {
 			//Everything goes well
 			if(this.state.showImages == true){
-				console.log('current Date : ' + this.state.earth_date_chosen);
 				return (this.generateCards());
 			}
 			//The date return no photos
 			else if (this.state.failJSON == true){
-				console.log('fail')
+				console.log('JSON request has failed');
 				return this.handleJSONFailed(); 
 			}
 			//The data is charging

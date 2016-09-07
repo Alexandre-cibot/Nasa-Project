@@ -7,7 +7,6 @@ var PictureOfTheDay = React.createClass({
 			data: {}
 		}
 	},
-
 	componentWillMount: function () {
 		var urlTest = 'http://hiring.js-back.rd00/todo/list';
 		var realUrl = 'https://api.nasa.gov/planetary/apod?api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
@@ -25,9 +24,7 @@ var PictureOfTheDay = React.createClass({
             }
         });
 	},
-
 	createBlockImage: function () {
-	
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
@@ -47,7 +44,6 @@ var PictureOfTheDay = React.createClass({
       		</div>
 			)	
 	},
-
 	render: function () {
 		
 		return this.createBlockImage();

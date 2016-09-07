@@ -89,17 +89,14 @@ var Curiosity = React.createClass(
 		},
 		handleChangeDate: function (newDate) {
 			this.setState({showCards: false});
-			//this.props.handleFooter(false);
-			//this.updateJSON(newDate);
-			this.setState({earth_date_chosen : newDate});
-		
+			this.setState({earth_date_chosen : newDate});	
 		},
 		handleChangePicsNumber: function (number) {
 			if(number !== this.state.picsNumber){
 				this.setState({picsNumber: number});
 			}
 			else{
-				console.log('Cest deja le bon nombre')
+				console.log('PicsNumber hasn\'t change');
 			}
 		},
 		handleGlobalCards: function () {
@@ -111,7 +108,6 @@ var Curiosity = React.createClass(
 						dateFormatFR={this.dateFormatFR}
 						/>
 			}
-			
 		},
 		launchCards: function () {
 			this.setState({showCards: true});
@@ -162,13 +158,7 @@ var Curiosity = React.createClass(
 			}
 		},
 		render: function () {
-			//Everything goes well
-				console.log("ShowCards ? : " + this.state.showCards)
 				return this.showCuriosity();
-		},
-		initMaterialBox: function (element) {
-			//Required for datePicker
-    		$(element).materialbox();
 		}
 	}
 )

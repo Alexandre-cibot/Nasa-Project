@@ -37,11 +37,8 @@ var App = React.createClass(
 			}
 		},
 		handleNavigationClick: function (currentLink) {
-			console.log('page cliqué : ' + currentLink);
-			//On test si le lien cliqué est différent de la page actuelle
-			this.state.page !== currentLink ? this.setState({page: currentLink}) : console.log('pas de rechargement');
-
-
+			//We check if the clicked link if different than the current link
+			this.state.page !== currentLink ? this.setState({page: currentLink}) : console.log('No reloading needed');
 		},
 		showPage: function () {
 			switch(this.state.page){
