@@ -34,6 +34,28 @@ blockquote {
 *
 */
 
+
+.side-nav{
+ /* background:url('../img/test.jpg');*/
+ background: black;
+}
+
+.side-nav .active a{
+  font-weight: 600;
+}
+
+.side-nav .background-bottom{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+}
+.side-nav a {
+      color: white;
+    font-size: 27px;
+    font-weight: 100;
+    margin-bottom: 39px;
+}
 nav .brand-logo {
     position: absolute;
     color: #fff;
@@ -43,7 +65,7 @@ nav .brand-logo {
     white-space: nowrap;
 }
 .Navigation{
-  background-color:rgba(22, 34, 82, 0.8);
+  background-color:#444E74;
   padding: 0 30px;
   letter-spacing: 2px;
 }
@@ -143,7 +165,7 @@ nav ul li:hover {
     width: 210px;
     margin-left: 0;
     height: 2px;
-    background-color: rgba(22, 34, 82, 0.8);
+    background-color: #444E74;
     margin-bottom:20px;
 }
 
@@ -151,7 +173,7 @@ nav ul li:hover {
     width: 210px;
     margin-right: 0;
     height: 2px;
-    background-color: rgba(22, 34, 82, 0.8);
+    background-color: #444E74;
     margin-top:10px;
 }
 
@@ -273,7 +295,7 @@ nav ul li:hover {
 /*footer*/
 
 #footer{
-  background-color:rgba(22, 34, 82, 0.8);
+  background-color:#444E74;
   margin-top: 120px;
   display:;
 }

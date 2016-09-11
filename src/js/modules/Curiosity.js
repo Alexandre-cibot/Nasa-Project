@@ -149,7 +149,7 @@ var Curiosity = React.createClass(
 					<div className="row">
 						<div className="col s6 offset-s3">
 							<p className="loadingImages">Chargement ...
-								<img src="../src/img/loader.gif"/>
+								<img src="src/img/loader.gif"/>
 							</p>
 						</div>
 			

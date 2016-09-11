@@ -5,10 +5,10 @@ var Navigation = React.createClass(
 			return {
 				activeLink: 'Home',
 				headerImgSrc: {
-					"Home": "/src/img/home.jpg",
-					"Curiosity": "/src/img/mars.jpg",
-					'FAQ': "/src/img/home.jpg",
-					"Help": "/src/img/home.jpg"
+					"Home": "src/img/home.jpg",
+					"Curiosity": "src/img/mars.jpg",
+					'FAQ': "src/img/home.jpg",
+					"Help": "src/img/home.jpg"
 				}
 			}
 		},
@@ -65,6 +65,7 @@ var Navigation = React.createClass(
 						       <ul className="side-nav" id="mobile-demo">
 						   		{/*List for mobile phone*/}
 						        {this.createContent()}
+						        <img className="background-bottom" src="/src/img/background-mobile-navbar.jpg"></img>
 					      	  </ul>
 						    </div>
 						</nav>
@@ -77,7 +78,7 @@ var Navigation = React.createClass(
 		initNavbar: function (element) {
 			$(element).sideNav({
 				menuWidth: 300, // Default is 240
-		        edge: 'right', // Choose the horizontal origin
+		        edge: 'left', // Choose the horizontal origin
 				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 			});
 		}

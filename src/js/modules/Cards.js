@@ -82,13 +82,13 @@ var Cards= React.createClass(
 									<img className="materialboxed" src={this.state.data.photos[i].img_src} ref={this.initMaterialBox}/>
 								</div>
 								<div className="card-content">
-									<span className="card-title activator grey-text text-darken-4">Title<i className="material-icons right">more_vert</i></span>
+									<span className="card-title activator grey-text text-darken-4"> N° {i + 1}<i className="material-icons right">more_vert</i></span>
 									<p>Date : {this.props.dateFormatFR(this.state.data.photos[i].earth_date)}</p>
 									<br />
 									<p><a className="activator">More infos ..</a></p>
 								</div>
 								<div className="card-reveal">
-									<span className="card-title grey-text text-darken-4">Title<i className="material-icons right">close</i></span>
+									<span className="card-title grey-text text-darken-4">Infos<i className="material-icons right">close</i></span>
 										<blockquote className="explanation">
 											<p><b>Rover : </b>{this.state.data.photos[i].rover.name}</p>
 											<p><b>Camera : </b>{this.state.data.photos[i].camera.full_name}, ("{this.state.data.photos[i].camera.name}")</p>
@@ -119,7 +119,7 @@ var Cards= React.createClass(
 					<div className="row">
 						<div className="col s6 offset-s3">
 							<p className="loadingImages">Chargement ...
-								<img src="../src/img/loader.gif"/>
+								<img src="src/img/loader.gif"/>
 							</p>
 						</div>
 					</div>

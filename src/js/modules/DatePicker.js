@@ -61,7 +61,7 @@ var DatePicker = React.createClass(
 				return (
 					<div>
 						<label>Pictures' number</label>
-					 	<select id="dropdown" defaultValue={this.state.picsNumber}>
+					 	<select id="dropdown" defaultValue={this.props.maxPics}>
 					        <option disabled>Number of pictures displayed</option>
 					        {options}
 				     	</select>
