@@ -68,7 +68,7 @@ nav .brand-logo {
 .Navigation{
   position: fixed;
   z-index: 30000;
-  background-color:#444E74;
+  background-color:#00004c;
   padding: 0 30px;
   letter-spacing: 2px;
 }
@@ -172,7 +172,7 @@ nav ul li:hover {
     width: 210px;
     margin-left: 0;
     height: 2px;
-    background-color: #444E74;
+    background-color: #00004c;
     margin-bottom:20px;
 }
 
@@ -180,7 +180,7 @@ nav ul li:hover {
     width: 210px;
     margin-right: 0;
     height: 2px;
-    background-color: #444E74;
+    background-color: #00004c;
     margin-top:10px;
 }
 
@@ -301,12 +301,16 @@ nav ul li:hover {
 /*footer*/
 
 #footer{
-  background-color:#444E74;
+  background-color:#00004c;
   margin-top: 120px;
   display:;
 }
 #footer p{
   letter-spacing: 0.5px;
+}
+
+#footer .footer-copyright{
+  background: #000033;
 }
 
 

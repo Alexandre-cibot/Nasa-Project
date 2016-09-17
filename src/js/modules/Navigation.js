@@ -36,7 +36,6 @@ var Navigation = React.createClass(
 								className={this.state.activeLink == currentLink[i].name ? "active" : "" }>
 									<a 
 									name={currentLink[i].name}
-									href={currentLink[i].url}
 									onClick={this.listenClick.bind(null,currentLink[i].name)}>
 
 										{currentLink[i].name}
@@ -57,7 +56,7 @@ var Navigation = React.createClass(
 					<div className="container-fluid">
 						<nav className='Navigation'>
 						    <div className="nav-wrapper">
-						      <a href="#!" className="brand-logo">Nasa - Project</a>
+						      <a href="#" className="brand-logo" onClick={this.listenClick.bind(null, "Home")}>Nasa - Project</a>
 						      <a href="#" data-activates="mobile-demo" className="button-collapse" ref={this.initNavbar}><i className="material-icons">menu</i></a>
 						      <ul className="right hide-on-med-and-down">
 						      	{/*List for large screen*/}
