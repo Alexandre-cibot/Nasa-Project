@@ -33,6 +33,7 @@ var Cards= React.createClass(
 		},
 		componentWillReceiveProps: function(nextProps) {
 			//If the date has changed
+			this.state.showImages ? this.setState({showImages : false}) : null // on change, the "load" gif has to be displayed
 			if(nextProps.earth_date_chosen !== this.state.earth_date_chosen){
 				let that = this; 
 				 $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + nextProps.earth_date_chosen  + "&api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX", function(result){
@@ -49,7 +50,6 @@ var Cards= React.createClass(
 				 	// ex: 9 june 2014, there is no pictures for that day. 	
 				 	that.setState({showImages: false})
 				 	that.setState({failJSON: true});
-				 	console.log('Et meeeeerde')
 				 });
 			}
 			else if(nextProps.picsNumber !== this.state.picsNumber){
@@ -60,7 +60,7 @@ var Cards= React.createClass(
 			console.log('Impossible to reach data, because they doesn\'t exist yet');
 				return (
 					<div className="failJSON">
-						<img src="../src/img/alien.gif"/>
+						<img src="/src/img/alien.gif"/>
 						<p>I'm affraid, there is no photos at this date.</p>
 						<h3>Try Again</h3>
 					</div>

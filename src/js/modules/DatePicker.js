@@ -14,7 +14,11 @@ var DatePicker = React.createClass(
 			    selectMonths: true, // Creates a dropdown to control month
 			    selectYears: 5, // Creates a dropdown of 5 years to control year
 			    max: new Date(this.props.max_date),
-			    min: new Date(2012,(8-1), 6) // Rover's landing date. There is no picture before.
+			    min: new Date(2012,(8-1), 6), // Rover's landing date. There is no picture before.
+			    today: null,
+			  	clear: null,
+			  	close: 'Ok'
+
 			  });
 		},
 		dateFormatAPI: function (date) { 

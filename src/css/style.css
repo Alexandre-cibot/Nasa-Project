@@ -38,6 +38,7 @@ blockquote {
 .side-nav{
  /* background:url('../img/test.jpg');*/
  background: black;
+ padding-top:30px;
 }
 
 .side-nav .active a{
@@ -65,6 +66,8 @@ nav .brand-logo {
     white-space: nowrap;
 }
 .Navigation{
+  position: fixed;
+  z-index: 30000;
   background-color:#444E74;
   padding: 0 30px;
   letter-spacing: 2px;
@@ -76,6 +79,10 @@ nav ul li.active {
 
 nav ul li:hover {
   background: rgba(255,255,255,0.2);
+}
+
+.wrapper-header-image{
+  padding-top: 55px;
 }
 
 /*
@@ -177,16 +184,11 @@ nav ul li:hover {
     margin-top:10px;
 }
 
-#Curiosity  .card {
+#Curiosity .card {
   border-radius: 12px;
   font-size: 13px;
 }
 
-@media(max-width:600px){
-  #Curiosity .card{
-    font-size: 10px;
-  }
-}
 
 #Curiosity .card img {
   border-radius: 12px 12px 0 0;
@@ -262,6 +264,10 @@ nav ul li:hover {
 #DatePicker label{
     font-size: 14px;
     color: #9e9e9e;
+}
+
+#DatePicker .select-wrapper input.select-dropdown{
+  font-size: 20px;
 }
 .picker__date-display {
     text-align: center;

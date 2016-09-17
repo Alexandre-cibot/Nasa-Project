@@ -34,7 +34,7 @@ var PictureOfTheDay = React.createClass({
 				</div>
 				<div className="row">
 					<div className="col s12 m6">
-						<img className="responsive-img" src={this.state.data.url} />
+						<img className="responsive-img materialboxed" src={this.state.data.url} />
 					</div>
 					<div className="col s12 m6">
 						<h4 className="grey-text text-darken-4 title-content">{this.state.data.title}</h4>

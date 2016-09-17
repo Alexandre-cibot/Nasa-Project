@@ -5,7 +5,7 @@ var Navigation = React.createClass(
 			return {
 				activeLink: 'Home',
 				headerImgSrc: {
-					"Home": "src/img/home.jpg",
+					"Home": "src/img/home.jpeg",
 					"Curiosity": "src/img/mars.jpg",
 					'FAQ': "src/img/home.jpg",
 					"Help": "src/img/home.jpg"
@@ -48,7 +48,8 @@ var Navigation = React.createClass(
 		},
 		render: function () {
 			var headerImgStyle = {
-				  background: 'url(' + this.state.headerImgSrc[this.state.activeLink] + ')'
+				  background: 'url(' + this.state.headerImgSrc[this.state.activeLink] + ')',
+				  backgroundPosition: "center"
 				};
 
 			return (
@@ -69,7 +70,7 @@ var Navigation = React.createClass(
 					      	  </ul>
 						    </div>
 						</nav>
-						<div className="row">
+						<div className="row wrapper-header-image">
 							<div className="header-image" style={headerImgStyle}></div>
 						</div>
 					</div>
