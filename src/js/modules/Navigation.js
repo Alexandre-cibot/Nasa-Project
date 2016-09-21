@@ -5,10 +5,10 @@ var Navigation = React.createClass(
 			return {
 				activeLink: 'Home',
 				headerImgSrc: {
-					"Home": "src/img/home.jpeg",
-					"Curiosity": "src/img/mars.jpg",
-					'FAQ': "src/img/home.jpg",
-					"Help": "src/img/home.jpg"
+					"Home": "public/img/home.jpeg",
+					"Curiosity": "public/img/mars.jpg",
+					'FAQ': "public/img/home.jpg",
+					"Help": "public/img/home.jpg"
 				}
 			}
 		},
@@ -65,7 +65,7 @@ var Navigation = React.createClass(
 						       <ul className="side-nav" id="mobile-demo">
 						   		{/*List for mobile phone*/}
 						        {this.createContent()}
-						        <img className="background-bottom" src="/src/img/background-mobile-navbar.jpg"></img>
+						        <img className="background-bottom" src="public/img/background-mobile-navbar.jpg"></img>
 					      	  </ul>
 						    </div>
 						</nav>

@@ -7,13 +7,14 @@ const Footer = function () {
 					            <div className="row">
 					              <div className="col l6 s12">
 					                <h5 className="white-text">Why this Website ? </h5>
-					                <p className="grey-text text-lighten-4">
+					                <div className="grey-text text-lighten-4">
 					                	I've made this website to improve my knowledge using : 
 					                	<br />
-					                	<div>Javascript - React - NodeJS - Webpack</div>
+					                	<p>Javascript - React - NodeJS - Webpack</p>
 					                	<br />
 					                	Also to work with an API. I use the the NASA Open API, available here <a href="https://api.nasa.gov/index.html">https://api.nasa.gov</a> to find pictures and descriptions transmited by the Rover.
-					                </p>
+
+					                </div>
 					              </div>
 					              <div className="col l4 offset-l2 s12">
 					                <h5 className="white-text">Want to know more ?</h5>

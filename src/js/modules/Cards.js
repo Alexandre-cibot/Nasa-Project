@@ -60,7 +60,7 @@ var Cards= React.createClass(
 			console.log('Impossible to reach data, because they doesn\'t exist yet');
 				return (
 					<div className="failJSON">
-						<img src="/src/img/alien.gif"/>
+						<img src="public/img/alien.gif"/>
 						<p>I'm affraid, there is no photos at this date.</p>
 						<h3>Try Again</h3>
 					</div>
@@ -119,7 +119,7 @@ var Cards= React.createClass(
 					<div className="row">
 						<div className="col s6 offset-s3">
 							<p className="loadingImages">Chargement ...
-								<img src="src/img/loader.gif"/>
+								<img src="public/img/loader.gif"/>
 							</p>
 						</div>
 					</div>
