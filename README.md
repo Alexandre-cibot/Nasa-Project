@@ -24,4 +24,4 @@ This page allow users to display curiosity rover's pictures on demand
 
 ### Mobile version 
 ![screen shot 2016-09-22 at 15 24 54](https://cloud.githubusercontent.com/assets/16755327/18749804/cb709d94-80d8-11e6-9a56-402e6f54248d.png)
-![screen shot 2016-09-22 at 15 25 09](https://cloud.githubusercontent.com/assets/16755327/18749807/ccf6864c-80d8-11e6-9fe1-c0bc98672da0.png)
+![screen shot 2016-09-22 at 15 30 28](https://cloud.githubusercontent.com/assets/16755327/18749989/89d13b9a-80d9-11e6-8fe0-16a851f0844a.png)
