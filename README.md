@@ -19,6 +19,7 @@ This project is in progress.
 ![screen shot 2016-09-22 at 15 21 31](https://cloud.githubusercontent.com/assets/16755327/18749735/7f69263c-80d8-11e6-8f86-323083e55f4d.png)
 ### Curiosity page
 This page allow users to display curiosity rover's pictures on demand
+
 ![screen shot 2016-09-22 at 15 21 45](https://cloud.githubusercontent.com/assets/16755327/18749738/81768ac8-80d8-11e6-9bc4-c27d9e133eb1.png)
 
 ### Mobile version 
