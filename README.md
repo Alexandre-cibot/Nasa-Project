@@ -1,5 +1,5 @@
 # Nasa-Project
-Using [Nasa API](https://api.nasa.gov/index.html), his application allow users to search and display Curiosity's pictures. 
+Using [Nasa API](https://api.nasa.gov/index.html), this application allow users to search and display Curiosity's pictures. 
 
 This project is in progress.
 

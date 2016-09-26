@@ -12,7 +12,7 @@ const Footer = function () {
 					                	<br />
 					                	<p>Javascript - React - NodeJS - Webpack</p>
 					                	<br />
-					                	Also to work with an API. I use the the NASA Open API, available here <a href="https://api.nasa.gov/index.html">https://api.nasa.gov</a> to find pictures and descriptions transmited by the Rover.
+					                	Also to work with an API. I use the NASA Open API, available here <a href="https://api.nasa.gov/index.html">https://api.nasa.gov</a> to find pictures and descriptions transmited by the Rover.
 
 					                </div>
 					              </div>
