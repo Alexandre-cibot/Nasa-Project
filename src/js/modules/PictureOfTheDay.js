@@ -1,6 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
-var PrivateConfig = require('../config/privateConfig');
+var PrivateConfig = require('../../../dist/config/privateConfig');
 
 var PictureOfTheDay = React.createClass({
 	getInitialState: function () {
@@ -57,21 +57,28 @@ var PictureOfTheDay = React.createClass({
 	},
 	showTranslate_DropDow: function () {
 		if(this.state.translate){
-			console.log('on affiche');
 			return(<div id="google_translate_element"></div>)
 		}
 		else{
-			console.log('On afficge aps')
 			return(<div style={{display:"none"}} id="google_translate_element"></div>)
 		}
 	},
+	showTitle: function () {
+		if(this.state.urlType){
+			return(<h2 className="notranslate">{this.state.urlType} of the day</h2>);
+		}
+	},
+	showButtonTranslate: function () {
+		if(this.state.data.explanation){
+			return (<button className="waves-effect waves-light btn" onClick={this.buttonTranslate}>Translate</button>)
+		}
+	},
 	createBlockImage: function () {
-		console.log(PrivateConfig);
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
 					<div className="col s12 m4">
-						<h2 className="notranslate">{this.state.urlType} of the day</h2>
+						{this.showTitle()}
 					</div>
 				</div>
 				<div className="row">
@@ -82,7 +89,7 @@ var PictureOfTheDay = React.createClass({
 					 	<blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
 					 	<div id="traduction" className="row">
 					 		<div className="col s6 m6">
-					 			<button className="waves-effect waves-light btn" onClick={this.buttonTranslate}>Translate</button>
+					 			{this.showButtonTranslate()}
 					 		</div>
 					 		<div className="col s6 m6">
 					 			{this.showTranslate_DropDow()}
