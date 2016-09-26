@@ -22,6 +22,7 @@ const Footer = function () {
 					                  <li><a className="" href="https://github.com/Alexandre-cibot/Nasa-Project">Github - Nasa-Project</a></li>
 					                  <li><a className="" href="https://www.alexandrecibot.com">Check-out my Port-Folio</a></li>
 					                </ul>
+					                 <div id="google_translate_element"></div> 
 					              </div>
 					            </div>
 					          </div>

@@ -82,7 +82,7 @@ nav ul li:hover {
 }
 
 .wrapper-header-image{
-  padding-top: 55px;
+  padding-top: 24px;
 }
 
 /*
@@ -312,5 +312,15 @@ nav ul li:hover {
 #footer .footer-copyright{
   background: #000033;
 }
+
+
+
+
+/* Google translate widget*/
+
+html.translated-ltr #app{
+  padding-top:39px;
+}
+
 
 

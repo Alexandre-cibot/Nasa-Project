@@ -39,7 +39,7 @@ var PictureOfTheDay = React.createClass({
 					<div className="col s12 m6">
 						<h4 className="grey-text text-darken-4 title-content">{this.state.data.title}</h4>
 					 	<blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
-					</div>  
+					</div> 
 	      		</div>
       		</div>
 			)	
