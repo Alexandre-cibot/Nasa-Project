@@ -11,7 +11,7 @@ var PictureOfTheDay = React.createClass({
 		}
 	},
 	componentWillMount: function () {
-		var url = 'https://api.nasa.gov/planetary/apod?api_key=' + PrivateConfig.personnal_key; // Change "PrivateConfig.personnal_key" by YOUR personnal key that you can get free here https://api.nasa.gov/index.html#live_example
+		var url = 'https://api.nasa.gov/planetary/apod?api_key=' + PrivateConfig.personnal_key;
 		var that = this; 
 		$.ajax({
             url: url,
