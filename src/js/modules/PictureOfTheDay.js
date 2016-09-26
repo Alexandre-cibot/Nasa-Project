@@ -31,7 +31,7 @@ var PictureOfTheDay = React.createClass({
 			if(this.state.data.url.indexOf('youtube')){
 				return (
 						<div id="container-picture-pictureOfTheDay" className="col s12 m6">
-							<iframe width="450" height="260" src={this.state.data.url} frameBorder="0" allowFullScreen></iframe>
+							<iframe id="video-youtube" src={this.state.data.url} frameBorder="0" allowFullScreen></iframe>
 						</div>
 						)
 			}
