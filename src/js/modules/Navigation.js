@@ -54,7 +54,7 @@ var Navigation = React.createClass(
 			return (
 					
 					<div className="container-fluid">
-						<nav className='Navigation'>
+						<nav className='Navigation notranslate'>
 						    <div className="nav-wrapper">
 						      <a href="#" className="brand-logo" onClick={this.listenClick.bind(null, "Home")}>Nasa - Project</a>
 						      <a href="#" data-activates="mobile-demo" className="button-collapse" ref={this.initNavbar}><i className="material-icons">menu</i></a>

@@ -115,7 +115,7 @@ var Curiosity = React.createClass(
 		showCuriosity: function () {
 			if(this.state.JSONLoad === true){
 					return (
-					<div id="Curiosity">
+					<div id="Curiosity" className="notranslate">
 						<div className="row">
 							<div className="col s12 m8 push-m2">
 								<h2>Curiosity</h2>

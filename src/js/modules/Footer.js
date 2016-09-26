@@ -2,7 +2,7 @@ var React = require('react');
 
 const Footer = function () {
 		return (
-			<footer id="footer"className="page-footer">
+			<footer id="footer"className="page-footer notranslate">
 					          <div className="container">
 					            <div className="row">
 					              <div className="col l6 s12">
@@ -22,14 +22,12 @@ const Footer = function () {
 					                  <li><a className="" href="https://github.com/Alexandre-cibot/Nasa-Project">Github - Nasa-Project</a></li>
 					                  <li><a className="" href="https://www.alexandrecibot.com">Check-out my Port-Folio</a></li>
 					                </ul>
-					                 <div id="google_translate_element"></div> 
 					              </div>
 					            </div>
 					          </div>
 					          <div className="footer-copyright">
 					            <div className="container">
-					            © 2016 Alexandre Cibot
-					            {/*<a className="grey-text text-lighten-4 right" href="#!">More Links</a>*/}
+					            © 2016 Alexandre Cibot					       
 					            </div>
 					          </div>
 			</footer>

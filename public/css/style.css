@@ -27,6 +27,9 @@ blockquote {
     letter-spacing: 0.9px;
 }
 
+.btn:hover{
+  background:#00004c
+}
 
 /* 
 *

@@ -4,7 +4,8 @@ var $ = require('jquery');
 var PictureOfTheDay = React.createClass({
 	getInitialState: function () {
 		return {
-			data: {}
+			data: {},
+			translate: false
 		}
 	},
 	componentWillMount: function () {
@@ -50,12 +51,26 @@ var PictureOfTheDay = React.createClass({
 					)
 		}
 	},
+	buttonTranslate: function () {
+
+		this.state.translate ? this.setState({translate: false}) : this.setState({translate: true});
+	},
+	showTranslate_DropDow: function () {
+		if(this.state.translate){
+			console.log('on affiche');
+			return(<div id="google_translate_element"></div>)
+		}
+		else{
+			console.log('On afficge aps')
+			return(<div style={{display:"none"}} id="google_translate_element"></div>)
+		}
+	},
 	createBlockImage: function () {
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
 					<div className="col s12 m4">
-						<h2>Picture of the day</h2>
+						<h2 className="notranslate">Picture of the day</h2>
 					</div>
 				</div>
 				<div className="row">
@@ -64,6 +79,15 @@ var PictureOfTheDay = React.createClass({
 					<div className="col s12 m6">
 						<h4 className="grey-text text-darken-4 title-content">{this.state.data.title}</h4>
 					 	<blockquote className="explanation"><p>{this.state.data.explanation}</p></blockquote>
+					 	<div id="traduction" className="row">
+					 		<div className="col s6 m6">
+					 			<button className="waves-effect waves-light btn" onClick={this.buttonTranslate}>Translate</button>
+					 		</div>
+					 		<div className="col s6 m6">
+					 			{this.showTranslate_DropDow()}
+					 			
+					 		</div>
+					 	</div>
 					</div> 
 	      		</div>
       		</div>
