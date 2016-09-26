@@ -117,6 +117,10 @@ nav ul li:hover {
   margin-bottom:30px;
 }
 
+#container-gif-pictureOfTheDay:not(img){
+  text-align: center;
+}
+
 /*
 *
 *
