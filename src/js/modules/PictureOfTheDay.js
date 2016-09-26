@@ -1,18 +1,17 @@
 var React = require('react');
 var $ = require('jquery');
+var PrivateConfig = require('../config/privateConfig');
 
 var PictureOfTheDay = React.createClass({
 	getInitialState: function () {
 		return {
 			data: {},
-			translate: false
+			translate: false,
+			urlType: ""
 		}
 	},
 	componentWillMount: function () {
-		var urlTest = 'http://hiring.js-back.rd00/todo/list';
-		var realUrl = 'https://api.nasa.gov/planetary/apod?api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
-		//Demo url
-		var url = 'https://api.nasa.gov/planetary/apod?api_key=XF9kCOy8zibQ0JSeBX96QpPlPTP3JFUSN8pDXlKX';
+		var url = 'https://api.nasa.gov/planetary/apod?api_key=' + PrivateConfig.personnal_key; // Change "PrivateConfig.personnal_key" by YOUR personnal key that you can get free here https://api.nasa.gov/index.html#live_example
 		var that = this; 
 		$.ajax({
             url: url,
@@ -21,6 +20,7 @@ var PictureOfTheDay = React.createClass({
             success: function (data) {
             	//console.log(data);
             	that.setState({data: data});
+            	data.url.indexOf('youtube') ? that.setState({urlType: "Video"}) : that.setState({urlType: "Picture"});
             	that.props.handleFooter(true);
             }
         });
@@ -66,11 +66,12 @@ var PictureOfTheDay = React.createClass({
 		}
 	},
 	createBlockImage: function () {
+		console.log(PrivateConfig);
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
 					<div className="col s12 m4">
-						<h2 className="notranslate">Picture of the day</h2>
+						<h2 className="notranslate">{this.state.urlType} of the day</h2>
 					</div>
 				</div>
 				<div className="row">
