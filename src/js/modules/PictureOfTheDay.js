@@ -20,35 +20,43 @@ var PictureOfTheDay = React.createClass({
             success: function (data) {
             	//console.log(data);
             	that.setState({data: data});
-            	data.url.indexOf('youtube') ? that.setState({urlType: "Video"}) : that.setState({urlType: "Picture"});
+            	// We check if it is an video or an picture.
+            	if(data.url.indexOf('youtube') > -1 ){
+            		that.setState({urlType: "Video"});
+            	}
+            	else{
+            		that.setState({urlType: "Picture"});
+            	}
             	that.props.handleFooter(true);
             }
         });
 	},
 	checkUrl: function () {
 		// We check ih the url in an youtube link, or an image link. 
-		if(this.state.data.url){
-			if(this.state.data.url.indexOf('youtube')){
-				return (
-						<div id="container-picture-pictureOfTheDay" className="col s12 m6">
-							<iframe id="video-youtube" src={this.state.data.url} frameBorder="0" allowFullScreen></iframe>
-						</div>
-						)
+
+		if(this.state.urlType.length > 0){
+			switch (this.state.urlType) {
+				case "Video":
+					return (
+							<div id="container-picture-pictureOfTheDay" className="col s12 m6">
+								<iframe id="video-youtube" src={this.state.data.url} frameBorder="0" allowFullScreen></iframe>
+							</div>
+							)
+					break;
+				case "Picture":
+					return (
+							<div id="container-picture-pictureOfTheDay" className="col s12 m6">
+								<img className="responsive-img materialboxed" src={this.state.data.url} />
+							</div>
+							)
+					break; 
+				default:
+					return (
+							<div id="container-gif-pictureOfTheDay" className="col s12 m6">
+								<img src="public/img/ring.gif" />
+							</div>
+							)
 			}
-			else{
-				return (
-						<div id="container-picture-pictureOfTheDay" className="col s12 m6">
-							<img className="responsive-img materialboxed" src={this.state.data.url} />
-						</div>
-						)
-			}
-		}
-		else{
-			return (
-					<div id="container-gif-pictureOfTheDay" className="col s12 m6">
-						<img src="public/img/ring.gif" />
-					</div>
-					)
 		}
 	},
 	buttonTranslate: function () {
