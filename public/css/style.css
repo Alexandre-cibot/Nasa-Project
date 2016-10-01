@@ -13,7 +13,7 @@ blockquote {
 
 .header-image{
 
-  height:200px;
+  height:190px;
 }
 
 @media(max-width:600px){
@@ -125,7 +125,6 @@ nav ul li:hover {
 }
 @media(max-width:800px){
   #container-picture-pictureOfTheDay{
-    height:180px;
     margin-bottom: 30px;
 }
 }
