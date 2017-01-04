@@ -118,10 +118,11 @@ nav ul li:hover {
 
 #PictureOfTheDay img{
   margin-bottom:30px;
+  max-height: 696px;
 }
 
 #container-picture-pictureOfTheDay{
-  height:322px
+ /*height:322px*/
 }
 @media(max-width:800px){
   #container-picture-pictureOfTheDay{

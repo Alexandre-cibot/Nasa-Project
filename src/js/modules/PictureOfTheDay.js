@@ -9,6 +9,7 @@ var PictureOfTheDay = React.createClass({
 			urlType: ""
 		}
 	},
+
 	componentWillMount: function () {
 		var url = 'https://api.nasa.gov/planetary/apod?api_key=' + PrivateConfig.personnal_key;
 		var that = this; 
@@ -30,7 +31,8 @@ var PictureOfTheDay = React.createClass({
             }
         });
 	},
-	checkUrl: function () {
+
+	displayMedia: function () {
 		// We check ih the url in an youtube link, or an image link. 
 
 		if(this.state.urlType.length > 0){
@@ -45,7 +47,7 @@ var PictureOfTheDay = React.createClass({
 				case "Picture":
 					return (
 							<div id="container-picture-pictureOfTheDay" className="col s12 m6">
-								<img className="responsive-img materialboxed" src={this.state.data.url} />
+								<img className="responsive-img" src={this.state.data.url} />
 							</div>
 							)
 					break; 
@@ -58,12 +60,14 @@ var PictureOfTheDay = React.createClass({
 			}
 		}
 	},
+	
 	showTitle: function () {
 		if(this.state.urlType){
 			return(<h2 className="notranslate">{this.state.urlType} of the day</h2>);
 		}
 	},
-	createBlockImage: function () {
+
+	render: function () {
 		return (
 			<div className="container" id="PictureOfTheDay">
 				<div className="row">
@@ -72,7 +76,7 @@ var PictureOfTheDay = React.createClass({
 					</div>
 				</div>
 				<div className="row">
-						{this.checkUrl()}
+						{this.displayMedia()}
 					
 					<div className="col s12 m6">
 						<h4 className="grey-text text-darken-4 title-content">{this.state.data.title}</h4>
@@ -81,10 +85,6 @@ var PictureOfTheDay = React.createClass({
 	      		</div>
       		</div>
 			)	
-	},
-	render: function () {
-		
-		return this.createBlockImage();
 	}
 })
 
