@@ -5,10 +5,10 @@ Using [Nasa API](https://api.nasa.gov/index.html), this application allow users 
 This project is in progress, more page will come.
 
 ## Technos 
-###languages :
+### languages :
  Html - Css - Javascript
 
-###Frameworks - Library
+### Frameworks - Library
 [React](https://fr.wikipedia.org/wiki/React_(JavaScript)) - [NodeJs](https://fr.wikipedia.org/wiki/Node.js) - [Webpack](https://webpack.github.io/docs/) - [Materialize](http://materializecss.com/)
 
 ## Desktop version
